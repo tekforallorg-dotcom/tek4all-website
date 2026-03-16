@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* ============================================
+   TEK4ALL DESIGN SYSTEM — Tailwind v4
+   ============================================ */
+
+@theme inline {
+  /* Colors */
+  --color-white: #ffffff;
+  --color-off-white: #f7f7f7;
+  --color-light-gray: #f2f2f2;
+  --color-ash: #e5e5e5;
+  --color-mid-gray: #6b7280;
+  --color-charcoal: #1d1e20;
+  --color-deep-black: #0d141a;
+  --color-near-black: #111111;
+
+  /* Fonts */
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-ui: "Inter", sans-serif;
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.6s ease-out forwards;
+  --animate-count-up: count-up 2s ease-out forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes count-up {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111111;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: #0d141a;
+  color: #ffffff;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.gradient-hero {
+  background: linear-gradient(to top, rgba(13, 20, 26, 0.95) 0%, rgba(13, 20, 26, 0.4) 50%, transparent 100%);
+}
+
+.gradient-dark {
+  background: linear-gradient(135deg, #0d141a 0%, #1d1e20 100%);
+}
+
+.gradient-cta {
+  background: linear-gradient(135deg, #1d1e20 0%, #0d141a 100%);
+}
+
+/* Hide scrollbar for carousel */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
