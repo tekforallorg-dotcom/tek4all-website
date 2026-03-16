@@ -102,7 +102,7 @@ export default function HomePage() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <Image
           src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/dWxBMoMroJirPV5w/shutterstock_1237754227-scaled-copy-d957rrLebWFzK6g2.jpg"
           alt="Children learning with technology"
@@ -150,9 +150,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== THREE PILLARS ===== */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-16">
+          <FadeIn className="text-center mb-10">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">What We Do</h2>
             <p className="text-mid-gray max-w-2xl mx-auto text-lg">Three pillars driving sustainable digital inclusion for communities and organisations across Nigeria.</p>
           </FadeIn>
@@ -174,9 +174,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== PROGRAMMES SNAPSHOT ===== */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Programmes</h2>
               <p className="text-mid-gray text-lg">Targeted initiatives building skills at every level.</p>
@@ -210,9 +210,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== SCHOOLS PIPELINE ===== */}
-      <section className="gradient-dark py-24 md:py-32">
+      <section className="gradient-dark py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-16">
+          <FadeIn className="text-center mb-10">
             <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-3">Youth Journey</p>
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">Schools to Innovation Pipeline</h2>
             <p className="text-white/60 max-w-2xl mx-auto text-lg">A structured pathway from first spark to career readiness.</p>
@@ -237,9 +237,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== B2B CORPORATE TRAINING ===== */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <p className="text-mid-gray text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-2">B2B Services</p>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Corporate Training</h2>
@@ -266,7 +266,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== MOONDESK TEASER ===== */}
-      <section className="bg-deep-black py-24 md:py-32">
+      <section className="bg-deep-black py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
@@ -297,9 +297,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== GALLERY TEASER ===== */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Impact in Pictures</h2>
               <p className="text-mid-gray text-lg">Moments from our programmes across Nigeria.</p>
@@ -322,9 +322,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== LATEST BLOG ===== */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Latest from Tek4All</h2>
               <p className="text-mid-gray text-lg">News, stories, and updates from our community.</p>
@@ -355,9 +355,9 @@ export default function HomePage() {
       </section>
 
       {/* ===== SOCIAL FEED ===== */}
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-12">
+          <FadeIn className="text-center mb-8">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">Follow Our Journey</h2>
             <p className="text-mid-gray text-lg">Stay connected on Instagram and LinkedIn.</p>
           </FadeIn>

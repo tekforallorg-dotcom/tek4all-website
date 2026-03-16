@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X, Instagram, Linkedin } from "lucide-react";
 
 const NAV_LINKS = [
@@ -16,21 +17,14 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  {
-    href: "https://www.instagram.com/tekforallorg",
-    label: "Instagram",
-    icon: Instagram,
-  },
-  {
-    href: "https://www.linkedin.com/company/tekforall",
-    label: "LinkedIn",
-    icon: Linkedin,
-  },
+  { href: "https://www.instagram.com/tekforallorg", label: "Instagram", icon: Instagram },
+  { href: "https://www.linkedin.com/company/tekforall", label: "LinkedIn", icon: Linkedin },
 ];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -38,13 +32,32 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileOpen(false);
+  }, [pathname]);
+
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? "hidden" : "";
+    if (isMobileOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+    }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
     };
   }, [isMobileOpen]);
+
+  const closeMobile = useCallback(() => setIsMobileOpen(false), []);
+
+  const showWhite = !isScrolled && !isMobileOpen;
 
   return (
     <header
@@ -54,15 +67,15 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between h-20">
+      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <Link href="/" className="relative z-50 flex-shrink-0">
+        <Link href="/" className="relative z-50 flex-shrink-0" onClick={closeMobile}>
           <Image
-            src="/images/tek4all-logo.jpg"
+            src={showWhite ? "/images/tek4all-logo-white.png" : "/images/tek4all-logo-dark.png"}
             alt="Tek4All — Skilling Lives, Uplifting Minds"
-            width={160}
-            height={48}
-            className="h-10 w-auto"
+            width={140}
+            height={42}
+            className="h-8 md:h-10 w-auto"
             priority
           />
         </Link>
@@ -112,7 +125,7 @@ export function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          onClick={() => setIsMobileOpen((prev) => !prev)}
           className={`lg:hidden relative z-50 p-2 transition-colors ${
             isScrolled || isMobileOpen ? "text-near-black" : "text-white"
           }`}
@@ -124,45 +137,47 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      {isMobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-20 bg-white z-40 overflow-y-auto">
-          <div className="flex flex-col px-6 py-8 gap-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsMobileOpen(false)}
-                className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-near-black py-3 border-b border-ash transition-colors hover:text-mid-gray"
-              >
-                {link.label}
-              </Link>
-            ))}
-
-            <div className="flex items-center gap-4 mt-8">
-              {SOCIAL_LINKS.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="text-near-black hover:text-mid-gray transition-colors"
-                >
-                  <social.icon size={22} />
-                </a>
-              ))}
-            </div>
-
+      <div
+        className={`lg:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto transition-transform duration-300 ${
+          isMobileOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col px-6 py-6 gap-1">
+          {NAV_LINKS.map((link) => (
             <Link
-              href="/partnerships"
-              onClick={() => setIsMobileOpen(false)}
-              className="mt-6 inline-flex justify-center bg-near-black text-white px-6 py-3 rounded-full text-base font-medium font-[family-name:var(--font-inter)] hover:bg-charcoal transition-colors"
+              key={link.href}
+              href={link.href}
+              onClick={closeMobile}
+              className="font-[family-name:var(--font-heading)] text-xl font-semibold text-near-black py-3 border-b border-ash transition-colors hover:text-mid-gray"
             >
-              Join Us
+              {link.label}
             </Link>
+          ))}
+
+          <div className="flex items-center gap-4 mt-6">
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="text-near-black hover:text-mid-gray transition-colors"
+              >
+                <social.icon size={22} />
+              </a>
+            ))}
           </div>
+
+          <Link
+            href="/partnerships"
+            onClick={closeMobile}
+            className="mt-4 inline-flex justify-center bg-near-black text-white px-6 py-3 rounded-full text-base font-medium font-[family-name:var(--font-inter)] hover:bg-charcoal transition-colors"
+          >
+            Join Us
+          </Link>
         </div>
-      )}
+      </div>
     </header>
   );
 }

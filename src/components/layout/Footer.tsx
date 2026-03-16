@@ -52,7 +52,7 @@ export function Footer() {
     <footer className="bg-deep-black text-white">
       {/* CTA Band */}
       <div className="gradient-cta">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center">
+        <div className="mx-auto max-w-7xl px-6 py-14 text-center">
           <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold mb-4">
             Join the Movement
           </h2>
@@ -83,11 +83,11 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Image
-              src="/images/tek4all-logo.jpg"
+              src="/images/tek4all-logo-white.png"
               alt="Tek4All"
               width={140}
               height={42}
-              className="h-9 w-auto brightness-0 invert mb-4"
+              className="h-9 w-auto mb-4"
             />
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Bridging the digital divide through practical skills, inclusive
