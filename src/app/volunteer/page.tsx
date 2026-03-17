@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import { createClient } from "@/lib/supabase/client";
 
 const ROLES = [
@@ -38,20 +39,13 @@ export default function VolunteerPage() {
 
   return (
     <>
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl">
-              Volunteer With Tek4All
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Make an impact from anywhere. Your skills can help empower communities across Nigeria.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Get Involved"
+        title="Volunteer With Tek4All"
+        description="Make an impact from anywhere. Your skills can help empower communities across Nigeria."
+      />
 
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16">
             <FadeIn>

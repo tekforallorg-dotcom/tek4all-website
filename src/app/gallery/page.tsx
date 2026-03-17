@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { GalleryAlbum } from "@/lib/types";
 import type { Metadata } from "next";
@@ -35,7 +36,7 @@ export default async function GalleryPage() {
         </div>
       </section>
 
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           {albums.length === 0 ? (
             <FadeIn>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, Handshake, Gift, Heart } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import { createClient } from "@/lib/supabase/client";
 
 const PARTNERSHIP_TYPES = [
@@ -50,22 +51,14 @@ export default function PartnershipsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl">
-              Partner With Us
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Together we can bridge the digital divide, empower communities, and
-              build an inclusive digital economy. Your partnership creates lasting impact.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Partnerships"
+        title="Partner With Us"
+        description="Together we can bridge the digital divide, empower communities, and build an inclusive digital economy. Your partnership creates lasting impact."
+      />
 
       {/* Partnership Types */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-16">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">
@@ -93,7 +86,7 @@ export default function PartnershipsPage() {
       </section>
 
       {/* Why Partner */}
-      <section className="gradient-dark py-24 md:py-32">
+      <section className="gradient-dark py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <FadeIn>

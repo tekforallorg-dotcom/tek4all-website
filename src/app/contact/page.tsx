@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import { createClient } from "@/lib/supabase/client";
 
 export default function ContactPage() {
@@ -28,21 +29,13 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Be part of the movement to bridge the digital divide. Contact us to
-              volunteer, partner, or support Tek4All.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Contact"
+        title="Get in Touch"
+        description="Be part of the movement to bridge the digital divide. Contact us to volunteer, partner, or support Tek4All."
+      />
 
-      <section className="bg-white py-24 md:py-32">
+      <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Form */}

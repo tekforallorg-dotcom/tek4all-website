@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Brain, BarChart3, Sparkles, Shield, CheckCircle2 } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -24,22 +25,14 @@ const WHY_IT_WORKS = [
 export default function CorporateTrainingPage() {
   return (
     <>
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-4">B2B Services</p>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl">
-              Corporate Training
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Practical AI, data, and digital transformation training for teams in NGOs, corporates, public sector, and foundations.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="B2B Services"
+        title="Corporate Training"
+        description="Practical AI, data, and digital transformation training for teams in NGOs, corporates, public sector, and foundations."
+      />
 
       {/* Training Tracks */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-16">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">Training Tracks</h2>
@@ -62,7 +55,7 @@ export default function CorporateTrainingPage() {
       </section>
 
       {/* Why It Works */}
-      <section className="gradient-dark py-24 md:py-32">
+      <section className="gradient-dark py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <FadeIn>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Layers, ListChecks, Paperclip, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -19,25 +20,18 @@ const FEATURES = [
 export default function MoonDeskPage() {
   return (
     <>
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-4">Product</p>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl">
-              MoonDesk
-            </h1>
-            <p className="text-white/70 text-xl md:text-2xl max-w-2xl leading-relaxed mb-8">
-              AI-powered programme management built for NGOs, programme teams, and mission-driven organisations.
-            </p>
-            <Link href="/contact" className="bg-white text-near-black px-8 py-4 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-base">
-              Get Early Access <ArrowRight size={16} />
-            </Link>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Product"
+        title="MoonDesk"
+        description="AI-powered programme management built for NGOs, programme teams, and mission-driven organisations."
+      >
+        <Link href="/contact" className="mt-6 bg-white text-near-black px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2">
+          Get Early Access <ArrowRight size={16} />
+        </Link>
+      </PageHero>
 
       {/* Features */}
-      <section className="bg-off-white py-24 md:py-32">
+      <section className="bg-off-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-16">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">
@@ -68,7 +62,7 @@ export default function MoonDeskPage() {
       </section>
 
       {/* CTA */}
-      <section className="gradient-dark py-24 md:py-32">
+      <section className="gradient-dark py-16 md:py-24">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <FadeIn>
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">

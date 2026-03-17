@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { PageHero } from "@/components/ui/PageHero";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { Programme } from "@/lib/types";
 import type { Metadata } from "next";
@@ -33,23 +34,11 @@ export default async function ProgrammesPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-deep-black pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn>
-            <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-4">
-              What We Do
-            </p>
-            <h1 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 max-w-3xl">
-              Our Programmes
-            </h1>
-            <p className="text-white/70 text-lg md:text-xl max-w-2xl leading-relaxed">
-              Targeted initiatives building digital skills at every level — from
-              schools and communities to organisations and workforce teams.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="What We Do"
+        title="Our Programmes"
+        description="Targeted initiatives building digital skills at every level — from schools and communities to organisations and workforce teams."
+      />
 
       {/* Programme Grid */}
       <section className="bg-off-white py-24 md:py-32">
