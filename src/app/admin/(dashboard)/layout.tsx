@@ -30,7 +30,8 @@ export default async function AdminLayout({
     <>
       {/* Hide root navbar/footer in admin */}
       <style>{`
-        body > div > header, body > div > footer, .gradient-cta { display: none !important; }
+        .site-navbar, .site-mobile-menu,
+        body > div > footer, .gradient-cta { display: none !important; }
         body > div > main { padding: 0 !important; }
       `}</style>
     <div className="min-h-screen bg-light-gray flex">

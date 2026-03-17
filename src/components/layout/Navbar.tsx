@@ -42,16 +42,16 @@ export function Navbar() {
     if (isMobileOpen) {
       document.body.style.overflow = "hidden";
       document.body.style.position = "fixed";
-      document.body.style.width = "100%";
+      document.body.style.inset = "0";
     } else {
       document.body.style.overflow = "";
       document.body.style.position = "";
-      document.body.style.width = "";
+      document.body.style.inset = "";
     }
     return () => {
       document.body.style.overflow = "";
       document.body.style.position = "";
-      document.body.style.width = "";
+      document.body.style.inset = "";
     };
   }, [isMobileOpen]);
 
@@ -60,101 +60,57 @@ export function Navbar() {
   const showWhite = !isScrolled && !isMobileOpen;
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || isMobileOpen
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between h-16 md:h-20">
-        {/* Logo */}
-        <Link href="/" className="relative z-50 flex-shrink-0" onClick={closeMobile}>
-          <Image
-            src={showWhite ? "/images/tek4all-logo-white.png" : "/images/tek4all-logo-dark.png"}
-            alt="Tek4All — Skilling Lives, Uplifting Minds"
-            width={140}
-            height={42}
-            className="h-8 md:h-10 w-auto"
-            priority
-          />
-        </Link>
-
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`font-[family-name:var(--font-inter)] text-[15px] font-medium transition-colors hover:opacity-70 ${
-                isScrolled ? "text-near-black" : "text-white"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Desktop Right: Social + CTA */}
-        <div className="hidden lg:flex items-center gap-4">
-          {SOCIAL_LINKS.map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={social.label}
-              className={`transition-colors hover:opacity-70 ${
-                isScrolled ? "text-near-black" : "text-white"
-              }`}
-            >
-              <social.icon size={18} />
-            </a>
-          ))}
-          <Link
-            href="/partnerships"
-            className={`ml-2 px-5 py-2.5 rounded-full text-sm font-medium font-[family-name:var(--font-inter)] transition-all ${
-              isScrolled
-                ? "bg-near-black text-white hover:bg-charcoal"
-                : "bg-white text-near-black hover:bg-off-white"
-            }`}
-          >
-            Join Us
-          </Link>
-        </div>
-
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setIsMobileOpen((prev) => !prev)}
-          className={`lg:hidden relative z-50 p-2 transition-colors ${
-            isScrolled || isMobileOpen ? "text-near-black" : "text-white"
-          }`}
-          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMobileOpen}
-        >
-          {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 top-16 bg-white z-40 overflow-y-auto transition-transform duration-300 ${
-          isMobileOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+    <>
+      {/* Main header bar */}
+      <header
+        className="site-navbar"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          transition: "background-color 0.3s, box-shadow 0.3s",
+          backgroundColor: isScrolled || isMobileOpen ? "rgba(255,255,255,0.97)" : "transparent",
+          boxShadow: isScrolled ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+          backdropFilter: isScrolled || isMobileOpen ? "blur(12px)" : "none",
+        }}
       >
-        <div className="flex flex-col px-6 py-6 gap-1">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={closeMobile}
-              className="font-[family-name:var(--font-heading)] text-xl font-semibold text-near-black py-3 border-b border-ash transition-colors hover:text-mid-gray"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="mx-auto max-w-7xl px-6 flex items-center justify-between" style={{ height: "64px" }}>
+          {/* Logo */}
+          <Link href="/" onClick={closeMobile} className="flex-shrink-0">
+            <Image
+              src={showWhite ? "/images/tek4all-logo-white.png" : "/images/tek4all-logo-dark.png"}
+              alt="Tek4All"
+              width={140}
+              height={42}
+              className="h-8 md:h-10 w-auto"
+              priority
+            />
+          </Link>
 
-          <div className="flex items-center gap-4 mt-6">
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex items-center gap-8">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                style={{
+                  fontFamily: "var(--font-inter), sans-serif",
+                  fontSize: "15px",
+                  fontWeight: 500,
+                  color: isScrolled ? "#111" : "#fff",
+                  transition: "opacity 0.2s",
+                }}
+                className="hover:opacity-70"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop Right */}
+          <div className="hidden lg:flex items-center gap-4">
             {SOCIAL_LINKS.map((social) => (
               <a
                 key={social.label}
@@ -162,22 +118,115 @@ export function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="text-near-black hover:text-mid-gray transition-colors"
+                style={{ color: isScrolled ? "#111" : "#fff", transition: "opacity 0.2s" }}
+                className="hover:opacity-70"
               >
-                <social.icon size={22} />
+                <social.icon size={18} />
               </a>
             ))}
+            <Link
+              href="/partnerships"
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: "14px",
+                fontWeight: 500,
+                padding: "10px 20px",
+                borderRadius: "9999px",
+                transition: "all 0.2s",
+                backgroundColor: isScrolled ? "#111" : "#fff",
+                color: isScrolled ? "#fff" : "#111",
+                marginLeft: "8px",
+              }}
+            >
+              Join Us
+            </Link>
           </div>
 
-          <Link
-            href="/partnerships"
-            onClick={closeMobile}
-            className="mt-4 inline-flex justify-center bg-near-black text-white px-6 py-3 rounded-full text-base font-medium font-[family-name:var(--font-inter)] hover:bg-charcoal transition-colors"
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsMobileOpen((prev) => !prev)}
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileOpen}
+            className="lg:hidden p-2"
+            style={{ color: isScrolled || isMobileOpen ? "#111" : "#fff" }}
           >
-            Join Us
-          </Link>
+            {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </nav>
+      </header>
+
+      {/* Mobile menu — completely separate portal-like overlay */}
+      {isMobileOpen && (
+        <div
+          className="lg:hidden site-mobile-menu"
+          style={{
+            position: "fixed",
+            top: "64px",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9998,
+            backgroundColor: "#fff",
+            overflowY: "auto",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          <div className="flex flex-col px-6 py-6">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMobile}
+                style={{
+                  fontFamily: "var(--font-heading), sans-serif",
+                  fontSize: "1.25rem",
+                  fontWeight: 600,
+                  color: "#111",
+                  padding: "14px 0",
+                  borderBottom: "1px solid #e5e5e5",
+                  display: "block",
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            <div className="flex items-center gap-4 mt-6">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  style={{ color: "#111" }}
+                >
+                  <social.icon size={22} />
+                </a>
+              ))}
+            </div>
+
+            <Link
+              href="/partnerships"
+              onClick={closeMobile}
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                fontSize: "1rem",
+                fontWeight: 500,
+                marginTop: "20px",
+                display: "flex",
+                justifyContent: "center",
+                padding: "14px 24px",
+                borderRadius: "9999px",
+                backgroundColor: "#111",
+                color: "#fff",
+              }}
+            >
+              Join Us
+            </Link>
+          </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }

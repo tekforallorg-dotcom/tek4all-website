@@ -12,29 +12,96 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, description, children }: PageHeroProps) {
   return (
-    <section className="relative bg-deep-black pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      {/* Gradient mesh background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-charcoal/40 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-charcoal/30 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4" />
+    <section
+      className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
+      style={{ backgroundColor: "#0d141a" }}
+    >
+      {/* Gradient blobs — inline styles because Tailwind v4 can't resolve custom color + opacity */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute rounded-full"
+          style={{
+            top: "-200px",
+            right: "-100px",
+            width: "700px",
+            height: "700px",
+            background: "radial-gradient(circle, rgba(50,55,65,0.6) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            bottom: "-250px",
+            left: "-150px",
+            width: "500px",
+            height: "500px",
+            background: "radial-gradient(circle, rgba(40,45,55,0.5) 0%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute rounded-full"
+          style={{
+            top: "30%",
+            left: "60%",
+            width: "300px",
+            height: "300px",
+            background: "radial-gradient(circle, rgba(60,65,75,0.3) 0%, transparent 70%)",
+          }}
+        />
       </div>
-      {/* Subtle grain overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noise%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noise)%27/%3E%3C/svg%3E")' }} />
-      {/* Decorative line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent to-white/10" />
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      {/* Grain texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: 0.04,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "128px 128px",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Top decorative line */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2"
+        style={{
+          width: "1px",
+          height: "80px",
+          background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.12))",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto max-w-7xl px-6">
         <FadeIn>
           {eyebrow && (
-            <p className="text-white/40 text-xs font-medium font-[family-name:var(--font-inter)] uppercase tracking-[0.2em] mb-6">
+            <p
+              className="text-xs font-medium uppercase mb-6"
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                letterSpacing: "0.2em",
+                color: "rgba(255,255,255,0.35)",
+              }}
+            >
               {eyebrow}
             </p>
           )}
-          <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] font-bold text-white leading-[1.1] mb-6 max-w-4xl">
+          <h1
+            className="font-bold leading-[1.1] mb-6 max-w-4xl"
+            style={{
+              fontFamily: "var(--font-heading), sans-serif",
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              color: "#ffffff",
+            }}
+          >
             {title}
           </h1>
           {description && (
-            <p className="text-white/60 text-lg md:text-xl max-w-2xl leading-relaxed">
+            <p
+              className="text-lg md:text-xl max-w-2xl leading-relaxed"
+              style={{ color: "rgba(255,255,255,0.55)" }}
+            >
               {description}
             </p>
           )}
@@ -42,8 +109,15 @@ export function PageHero({ eyebrow, title, description, children }: PageHeroProp
         </FadeIn>
       </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {/* Bottom edge line */}
+      <div
+        className="absolute bottom-0 left-0 right-0"
+        style={{
+          height: "1px",
+          background: "linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)",
+        }}
+        aria-hidden="true"
+      />
     </section>
   );
 }
