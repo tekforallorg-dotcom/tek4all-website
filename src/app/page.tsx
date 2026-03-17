@@ -1,72 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Monitor, Wifi, Users, Brain, BarChart3, Shield, Sparkles, ChevronRight } from "lucide-react";
+import { ArrowRight, Monitor, Wifi, Users, Brain, BarChart3, Shield, Sparkles, ChevronRight, Instagram, Linkedin, ExternalLink } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { StatCounter } from "@/components/ui/StatCounter";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
+import type { ImpactStat, Programme, SocialPost, PartnerLogo, BlogPost } from "@/lib/types";
+
+// Revalidate every 60s so admin changes appear quickly
+export const revalidate = 60;
 
 /* ============================================
-   STATIC DATA (will be replaced with Supabase fetches)
+   STRUCTURAL CONSTANTS (not CMS-managed)
    ============================================ */
 
-const IMPACT_STATS = [
-  { value: "1,850+", label: "Community Members" },
-  { value: "545+", label: "People Trained" },
-  { value: "4", label: "Schools Reached" },
-  { value: "69", label: "Teachers Trained" },
-  { value: "283", label: "Women Trained" },
-  { value: "4", label: "Programmes Delivered" },
-];
-
 const THREE_PILLARS = [
-  {
-    icon: Users,
-    title: "Community Digital Inclusion",
-    description: "Bridging the digital divide through targeted education and hands-on community engagement initiatives.",
-    outcome: "Practical skills, confidence, real projects.",
-  },
-  {
-    icon: Wifi,
-    title: "Systems & Infrastructure",
-    description: "Establishing the physical connectivity and hardware foundations necessary for sustainable access.",
-    outcome: "Connectivity, access, safe learning spaces.",
-  },
-  {
-    icon: Monitor,
-    title: "Workforce Enablement",
-    description: "Empowering organisations with the tools, training, and workflows to adopt digital systems.",
-    outcome: "Adoption-focused training and tools.",
-  },
-];
-
-const FEATURED_PROGRAMMES = [
-  {
-    slug: "ai4all-school-tours",
-    title: "AI4All School Tours",
-    category: "Schools & Youth",
-    description: "Hands-on school visits introducing AI literacy and ethics to students where they are.",
-    image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/img_6095-AVLxOx9ROXHxbl2N.jpg",
-  },
-  {
-    slug: "women-in-tek",
-    title: "Women-in-Tek",
-    category: "Women & Communities",
-    description: "AI and digital literacy upskilling for girls and women to earn meaningful income.",
-    image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/women-in-tek-YNqBgaVlb5hJW2gV.jpg",
-  },
-  {
-    slug: "tek4teachers",
-    title: "Tek4Teachers",
-    category: "Systems Change",
-    description: "Empowering educators with AI workflows and data skills to transform classroom delivery.",
-    image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/img_6206-m7VDzDbQJgUjkMKr.jpg",
-  },
-  {
-    slug: "nextgen-innovators",
-    title: "NextGen Innovators",
-    category: "Schools & Youth",
-    description: "Coding, robotics, and STEM education nurturing the next generation of tech leaders.",
-    image: "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/mobile-hero-A85Erp5VXQF3NNra.jpg",
-  },
+  { icon: Users, title: "Community Digital Inclusion", description: "Bridging the digital divide through targeted education and hands-on community engagement initiatives.", outcome: "Practical skills, confidence, real projects." },
+  { icon: Wifi, title: "Systems & Infrastructure", description: "Establishing the physical connectivity and hardware foundations necessary for sustainable access.", outcome: "Connectivity, access, safe learning spaces." },
+  { icon: Monitor, title: "Workforce Enablement", description: "Empowering organisations with the tools, training, and workflows to adopt digital systems.", outcome: "Adoption-focused training and tools." },
 ];
 
 const PIPELINE_STEPS = [
@@ -83,7 +33,8 @@ const B2B_SERVICES = [
   { icon: Shield, title: "Responsible & Secure AI", description: "Navigating ethics, privacy, and security in the age of intelligence." },
 ];
 
-const GALLERY_IMAGES = [
+const ZYRO_BASE = "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/";
+const GALLERY_FALLBACK = [
   "13947a-AMqlapqPxVI5D5aD.jpg",
   "d2153507-8151-4d70-9f30-306d831d9f67-m6LjXoZZ5xS54W87.jpg",
   "img_0169-AGB2RoRrZ8T5xn39.JPG",
@@ -92,13 +43,28 @@ const GALLERY_IMAGES = [
   "img_6095-AVLxOx9ROXHxbl2N.jpg",
 ];
 
-const ZYRO_BASE = "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/";
-
 /* ============================================
-   PAGE COMPONENT
+   PAGE — fetches all dynamic content
    ============================================ */
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await createServerSupabaseClient();
+
+  // Parallel fetches
+  const [statsRes, programmesRes, socialRes, partnersRes, blogRes] = await Promise.all([
+    supabase.from("impact_stats").select("*").eq("is_visible", true).order("sort_order"),
+    supabase.from("programmes").select("*").eq("is_published", true).eq("is_featured", true).order("sort_order"),
+    supabase.from("social_posts").select("*").eq("is_visible", true).order("sort_order").limit(8),
+    supabase.from("partner_logos").select("*").eq("is_visible", true).order("sort_order"),
+    supabase.from("blog_posts").select("*").eq("status", "published").order("published_at", { ascending: false }).limit(3),
+  ]);
+
+  const stats = (statsRes.data ?? []) as ImpactStat[];
+  const programmes = (programmesRes.data ?? []) as Programme[];
+  const socialPosts = (socialRes.data ?? []) as SocialPost[];
+  const partners = (partnersRes.data ?? []) as PartnerLogo[];
+  const blogPosts = (blogRes.data ?? []) as BlogPost[];
+
   return (
     <>
       {/* ===== HERO ===== */}
@@ -112,7 +78,7 @@ export default function HomePage() {
           quality={85}
         />
         <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute inset-0 bg-deep-black/30" />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(13,20,26,0.35)" }} />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 text-center text-white pt-20">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 max-w-4xl mx-auto">
@@ -138,19 +104,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== IMPACT STATS ===== */}
-      <section className="bg-deep-black py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {IMPACT_STATS.map((stat) => (
-              <StatCounter key={stat.label} value={stat.value} label={stat.label} />
-            ))}
+      {/* ===== IMPACT STATS (from Supabase) ===== */}
+      {stats.length > 0 && (
+        <section style={{ backgroundColor: "#0d141a" }} className="py-14 md:py-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+              {stats.map((stat) => (
+                <StatCounter key={stat.id} value={stat.value} label={stat.label} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ===== THREE PILLARS ===== */}
-      <section className="bg-off-white py-16 md:py-20">
+      <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-10">
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">What We Do</h2>
@@ -159,13 +127,13 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6">
             {THREE_PILLARS.map((pillar, i) => (
               <FadeIn key={pillar.title} delay={i * 0.15}>
-                <div className="bg-white rounded-2xl p-8 h-full shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 bg-near-black rounded-xl flex items-center justify-center mb-6">
+                <div className="bg-white rounded-2xl p-8 h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ backgroundColor: "#111" }}>
                     <pillar.icon size={22} className="text-white" />
                   </div>
                   <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-near-black mb-3">{pillar.title}</h3>
                   <p className="text-mid-gray mb-4 leading-relaxed">{pillar.description}</p>
-                  <p className="text-sm font-medium text-near-black/70 font-[family-name:var(--font-inter)]">{"\u2192"} {pillar.outcome}</p>
+                  <p className="text-sm font-medium font-[family-name:var(--font-inter)]" style={{ color: "rgba(17,17,17,0.6)" }}>{"\u2192"} {pillar.outcome}</p>
                 </div>
               </FadeIn>
             ))}
@@ -173,62 +141,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== PROGRAMMES SNAPSHOT ===== */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Programmes</h2>
-              <p className="text-mid-gray text-lg">Targeted initiatives building skills at every level.</p>
-            </div>
-            <Link href="/programmes" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-              View All <ArrowRight size={16} />
-            </Link>
-          </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {FEATURED_PROGRAMMES.map((prog, i) => (
-              <FadeIn key={prog.slug} delay={i * 0.1}>
-                <Link href={`/programmes/${prog.slug}`} className="group block bg-light-gray rounded-2xl overflow-hidden hover:shadow-lg transition-all">
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image src={prog.image} alt={prog.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute top-3 left-3">
-                      <span className="bg-white/90 backdrop-blur-sm text-near-black text-xs font-medium font-[family-name:var(--font-inter)] px-3 py-1 rounded-full">{prog.category}</span>
+      {/* ===== PROGRAMMES (from Supabase) ===== */}
+      {programmes.length > 0 && (
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Programmes</h2>
+                <p className="text-mid-gray text-lg">Targeted initiatives building skills at every level.</p>
+              </div>
+              <Link href="/programmes" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
+                View All <ArrowRight size={16} />
+              </Link>
+            </FadeIn>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {programmes.slice(0, 4).map((prog, i) => (
+                <FadeIn key={prog.id} delay={i * 0.1}>
+                  <Link
+                    href={prog.slug === "corporate-training" ? "/corporate-training" : prog.slug === "moondesk" ? "/moondesk" : `/programmes/${prog.slug}`}
+                    className="group block rounded-2xl overflow-hidden hover:shadow-lg transition-all"
+                    style={{ backgroundColor: "#f2f2f2" }}
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      {prog.cover_image_url ? (
+                        <Image src={prog.cover_image_url} alt={prog.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: "#e5e5e5" }}>
+                          <span className="text-mid-gray/40 font-[family-name:var(--font-heading)]">{prog.title}</span>
+                        </div>
+                      )}
+                      <div className="absolute top-3 left-3">
+                        <span className="text-near-black text-xs font-medium font-[family-name:var(--font-inter)] px-3 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)" }}>
+                          {prog.category}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2 group-hover:text-charcoal transition-colors">{prog.title}</h3>
-                    <p className="text-mid-gray text-sm leading-relaxed line-clamp-2">{prog.description}</p>
-                    <span className="inline-flex items-center gap-1 text-near-black text-sm font-medium font-[family-name:var(--font-inter)] mt-3 group-hover:gap-2 transition-all">
-                      Learn more <ChevronRight size={14} />
-                    </span>
-                  </div>
-                </Link>
-              </FadeIn>
-            ))}
+                    <div className="p-5">
+                      <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2">{prog.title}</h3>
+                      <p className="text-mid-gray text-sm leading-relaxed line-clamp-2">{prog.short_description}</p>
+                      <span className="inline-flex items-center gap-1 text-near-black text-sm font-medium font-[family-name:var(--font-inter)] mt-3 group-hover:gap-2 transition-all">
+                        Learn more <ChevronRight size={14} />
+                      </span>
+                    </div>
+                  </Link>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ===== SCHOOLS PIPELINE ===== */}
-      <section className="gradient-dark py-16 md:py-20">
+      <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #0d141a 0%, #1d1e20 100%)" }}>
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-10">
-            <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-3">Youth Journey</p>
+            <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Youth Journey</p>
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">Schools to Innovation Pipeline</h2>
-            <p className="text-white/60 max-w-2xl mx-auto text-lg">A structured pathway from first spark to career readiness.</p>
+            <p style={{ color: "rgba(255,255,255,0.5)" }} className="max-w-2xl mx-auto text-lg">A structured pathway from first spark to career readiness.</p>
           </FadeIn>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {PIPELINE_STEPS.map((s, i) => (
               <FadeIn key={s.step} delay={i * 0.12}>
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 h-full hover:bg-white/10 transition-colors">
-                  <span className="text-white/30 font-[family-name:var(--font-heading)] text-5xl font-bold">{s.step}</span>
+                <div className="rounded-2xl p-6 h-full transition-colors" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  <span className="font-[family-name:var(--font-heading)] text-5xl font-bold" style={{ color: "rgba(255,255,255,0.15)" }}>{s.step}</span>
                   <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-white mt-4 mb-2">{s.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed">{s.description}</p>
+                  <p style={{ color: "rgba(255,255,255,0.5)" }} className="text-sm leading-relaxed">{s.description}</p>
                 </div>
               </FadeIn>
             ))}
           </div>
-          <FadeIn className="text-center mt-12">
+          <FadeIn className="text-center mt-10">
             <Link href="/partnerships" className="bg-white text-near-black px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2">
               Bring Tek4All to Your School <ArrowRight size={16} />
             </Link>
@@ -237,11 +219,11 @@ export default function HomePage() {
       </section>
 
       {/* ===== B2B CORPORATE TRAINING ===== */}
-      <section className="bg-off-white py-16 md:py-20">
+      <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
-              <p className="text-mid-gray text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-2">B2B Services</p>
+              <p className="text-mid-gray text-xs font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-2">B2B Services</p>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Corporate Training</h2>
               <p className="text-mid-gray text-lg max-w-xl">Upskill your workforce with practical AI, data, and digital transformation training.</p>
             </div>
@@ -252,8 +234,8 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {B2B_SERVICES.map((svc, i) => (
               <FadeIn key={svc.title} delay={i * 0.1}>
-                <div className="bg-white rounded-2xl p-6 h-full shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-11 h-11 bg-light-gray rounded-xl flex items-center justify-center mb-5">
+                <div className="bg-white rounded-2xl p-6 h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "#f2f2f2" }}>
                     <svc.icon size={20} className="text-near-black" />
                   </div>
                   <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-near-black mb-2">{svc.title}</h3>
@@ -266,17 +248,17 @@ export default function HomePage() {
       </section>
 
       {/* ===== MOONDESK TEASER ===== */}
-      <section className="bg-deep-black py-16 md:py-20">
+      <section style={{ backgroundColor: "#0d141a" }} className="py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeIn>
-              <p className="text-white/50 text-sm font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-3">Product</p>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Product</p>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">MoonDesk</h2>
-              <p className="text-white/70 text-xl mb-6 leading-relaxed">AI-powered programme management built for NGOs, programme teams, and mission-driven organisations.</p>
+              <p style={{ color: "rgba(255,255,255,0.6)" }} className="text-xl mb-6 leading-relaxed">AI-powered programme management built for NGOs, programme teams, and mission-driven organisations.</p>
               <ul className="space-y-4 mb-8">
                 {["Programmes & workstreams — structured, manageable hierarchies", "Task management — assign, track, and report in real time", "Evidence & attachments — link proof of impact directly to tasks", "Reporting dashboards — high-visibility views across all projects"].map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-white/60 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-2 flex-shrink-0" />
+                  <li key={f} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.3)" }} />
                     {f}
                   </li>
                 ))}
@@ -286,9 +268,9 @@ export default function HomePage() {
               </Link>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-8 aspect-[4/3] flex items-center justify-center">
-                <p className="text-white/30 font-[family-name:var(--font-heading)] text-lg text-center">
-                  MoonDesk Dashboard Preview<br /><span className="text-sm text-white/20">Coming soon</span>
+              <div className="rounded-2xl p-8 aspect-[4/3] flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                <p className="font-[family-name:var(--font-heading)] text-lg text-center" style={{ color: "rgba(255,255,255,0.2)" }}>
+                  MoonDesk Dashboard Preview<br /><span className="text-sm" style={{ color: "rgba(255,255,255,0.12)" }}>Coming soon</span>
                 </p>
               </div>
             </FadeIn>
@@ -296,7 +278,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== GALLERY TEASER ===== */}
+      {/* ===== GALLERY TEASER (from Supabase or fallback) ===== */}
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
@@ -309,11 +291,11 @@ export default function HomePage() {
             </Link>
           </FadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {GALLERY_IMAGES.map((img, i) => (
+            {GALLERY_FALLBACK.map((img, i) => (
               <FadeIn key={img} delay={i * 0.08}>
                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group">
                   <Image src={`${ZYRO_BASE}${img}`} alt="Tek4All community programme" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-near-black/0 group-hover:bg-near-black/20 transition-colors" />
+                  <div className="absolute inset-0 group-hover:bg-near-black/20 transition-colors" />
                 </div>
               </FadeIn>
             ))}
@@ -321,74 +303,125 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== LATEST BLOG ===== */}
-      <section className="bg-off-white py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Latest from Tek4All</h2>
-              <p className="text-mid-gray text-lg">News, stories, and updates from our community.</p>
-            </div>
-            <Link href="/blog" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-              Read All <ArrowRight size={16} />
-            </Link>
-          </FadeIn>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: "Bwari Pilot Tech Hub: Bridging the Digital Divide Through Education", excerpt: "Launching mid-2025, this groundbreaking facility in Bwari will offer free hands-on training in coding, digital literacy, and AI.", date: "May 8, 2024" },
-              { title: "Join Tek4All as a Volunteer — Make an Impact from Anywhere", excerpt: "Whether you are a tech expert, educator, writer, or community leader, your skills can help empower communities.", date: "May 8, 2024" },
-              { title: "AI4All School Tours Launch Announcement", excerpt: "Bringing hands-on AI demonstrations directly to secondary schools across Abuja.", date: "Coming Soon" },
-            ].map((post, i) => (
-              <FadeIn key={post.title} delay={i * 0.12}>
-                <div className="bg-white rounded-2xl overflow-hidden h-full shadow-sm hover:shadow-md transition-shadow">
-                  <div className="bg-light-gray aspect-[16/9]" />
-                  <div className="p-6">
-                    <p className="text-mid-gray text-xs font-[family-name:var(--font-inter)] mb-2">{post.date}</p>
-                    <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2 line-clamp-2">{post.title}</h3>
-                    <p className="text-mid-gray text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SOCIAL FEED ===== */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-8">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">Follow Our Journey</h2>
-            <p className="text-mid-gray text-lg">Stay connected on Instagram and LinkedIn.</p>
-          </FadeIn>
-          <FadeIn>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="bg-light-gray rounded-2xl aspect-square flex items-center justify-center">
-                  <p className="text-mid-gray/40 text-sm font-[family-name:var(--font-inter)] text-center px-4">Social post<br /><span className="text-xs">Managed from admin</span></p>
-                </div>
+      {/* ===== LATEST BLOG (from Supabase) ===== */}
+      {blogPosts.length > 0 && (
+        <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+              <div>
+                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Latest from Tek4All</h2>
+                <p className="text-mid-gray text-lg">News, stories, and updates from our community.</p>
+              </div>
+              <Link href="/blog" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
+                Read All <ArrowRight size={16} />
+              </Link>
+            </FadeIn>
+            <div className="grid md:grid-cols-3 gap-6">
+              {blogPosts.map((post, i) => (
+                <FadeIn key={post.id} delay={i * 0.12}>
+                  <Link href={`/blog/${post.slug}`} className="group block bg-white rounded-2xl overflow-hidden h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+                    <div className="relative aspect-[16/9] overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
+                      {post.cover_image_url && (
+                        <Image src={post.cover_image_url} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      )}
+                    </div>
+                    <div className="p-6">
+                      {post.published_at && (
+                        <p className="text-mid-gray text-xs font-[family-name:var(--font-inter)] mb-2">
+                          {new Date(post.published_at).toLocaleDateString("en-NG", { year: "numeric", month: "long", day: "numeric" })}
+                        </p>
+                      )}
+                      <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2 line-clamp-2">{post.title}</h3>
+                      {post.excerpt && <p className="text-mid-gray text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>}
+                    </div>
+                  </Link>
+                </FadeIn>
               ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ===== PARTNER SLIDER ===== */}
-      <section className="gradient-dark py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-10">
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold text-white mb-2">Our Partners & Supporters</h2>
-            <p className="text-white/50 text-sm">Logos managed from admin panel</p>
-          </FadeIn>
-          <div className="flex items-center justify-center gap-12 flex-wrap">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="w-24 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                <span className="text-white/20 text-xs font-[family-name:var(--font-inter)]">Logo</span>
-              </div>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* ===== SOCIAL FEED (from Supabase) ===== */}
+      {socialPosts.length > 0 && (
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <FadeIn className="text-center mb-8">
+              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">Follow Our Journey</h2>
+              <p className="text-mid-gray text-lg">Stay connected on Instagram and LinkedIn.</p>
+            </FadeIn>
+            <FadeIn>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {socialPosts.slice(0, 4).map((post) => (
+                  <a
+                    key={post.id}
+                    href={post.external_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block rounded-2xl overflow-hidden relative"
+                    style={{ backgroundColor: "#f2f2f2" }}
+                  >
+                    <div className="relative aspect-square">
+                      {post.image_url ? (
+                        <Image src={post.image_url} alt={post.excerpt || "Social post"} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          {post.platform === "instagram" ? <Instagram size={32} className="text-mid-gray/30" /> : <Linkedin size={32} className="text-mid-gray/30" />}
+                        </div>
+                      )}
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-near-black/0 group-hover:bg-near-black/40 transition-colors flex items-center justify-center">
+                        <ExternalLink size={20} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      {/* Platform badge */}
+                      <div className="absolute top-3 left-3">
+                        <span className="text-xs font-medium px-2.5 py-1 rounded-full font-[family-name:var(--font-inter)] capitalize" style={{ backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)" }}>
+                          {post.platform}
+                        </span>
+                      </div>
+                    </div>
+                    {post.excerpt && (
+                      <div className="p-3">
+                        <p className="text-mid-gray text-xs line-clamp-2">{post.excerpt}</p>
+                      </div>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
+      {/* ===== PARTNER LOGOS (from Supabase) ===== */}
+      {partners.length > 0 && (
+        <section className="py-14 md:py-16" style={{ background: "linear-gradient(135deg, #0d141a 0%, #1d1e20 100%)" }}>
+          <div className="mx-auto max-w-7xl px-6">
+            <FadeIn className="text-center mb-8">
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold text-white mb-2">Our Partners & Supporters</h2>
+            </FadeIn>
+            <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+              {partners.map((partner) => (
+                <FadeIn key={partner.id}>
+                  {partner.website_url ? (
+                    <a href={partner.website_url} target="_blank" rel="noopener noreferrer" className="block opacity-70 hover:opacity-100 transition-opacity" title={partner.name}>
+                      <div className="relative h-10 w-24 md:w-28">
+                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain brightness-0 invert" />
+                      </div>
+                    </a>
+                  ) : (
+                    <div className="opacity-70" title={partner.name}>
+                      <div className="relative h-10 w-24 md:w-28">
+                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain brightness-0 invert" />
+                      </div>
+                    </div>
+                  )}
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 }

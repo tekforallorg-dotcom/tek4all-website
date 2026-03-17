@@ -6,6 +6,8 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { GalleryAlbum } from "@/lib/types";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Gallery",
   description: "Photos and moments from Tek4All's programmes across Nigeria.",

@@ -6,6 +6,8 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import type { BlogPost } from "@/lib/types";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "News, stories, and updates from Tek4All's community and programmes.",
