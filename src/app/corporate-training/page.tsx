@@ -28,8 +28,12 @@ export default function CorporateTrainingPage() {
       <PageHero
         eyebrow="B2B Services"
         title="Corporate Training"
-        description="Practical AI, data, and digital transformation training for teams in NGOs, corporates, public sector, and foundations."
-      />
+        description="The 2-Win Story: Maximise Capacity, Enable Social Impact."
+      >
+        <p className="mt-4 text-lg md:text-xl max-w-2xl leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+          Upskill your workforce with practical AI, data, and digital transformation training.
+        </p>
+      </PageHero>
 
       {/* Training Tracks */}
       <section className="bg-off-white py-16 md:py-24">

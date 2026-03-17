@@ -280,21 +280,16 @@ export default async function HomePage() {
 
             {/* Product mockup — clean, frameless, floating */}
             <FadeIn delay={0.2}>
-              <div className="relative lg:-mr-12 xl:-mr-20">
-                {/* Desktop mockup */}
-                <div className="relative" style={{ filter: "drop-shadow(0 25px 60px rgba(0,0,0,0.5))" }}>
-                  <div className="rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
-                    <Image
-                      src="/images/moondesk-preview.png"
-                      alt="MoonDesk dashboard"
-                      width={800}
-                      height={500}
-                      className="w-full h-auto block"
-                    />
-                  </div>
+              <div className="relative">
+                <div className="relative rounded-xl overflow-hidden" style={{ filter: "drop-shadow(0 20px 50px rgba(0,0,0,0.4))" }}>
+                  <Image
+                    src="/images/moondesk-preview.png"
+                    alt="MoonDesk dashboard"
+                    width={800}
+                    height={500}
+                    className="w-full h-auto block"
+                  />
                 </div>
-                {/* Soft bottom fade so it doesn't have a hard edge */}
-                <div className="absolute -bottom-4 left-0 right-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to top, #0d141a, transparent)" }} aria-hidden="true" />
               </div>
             </FadeIn>
           </div>
