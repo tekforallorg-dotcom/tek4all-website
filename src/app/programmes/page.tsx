@@ -39,7 +39,7 @@ export default async function ProgrammesPage() {
       <PageHero
         eyebrow="What We Do"
         title="Our Programmes"
-        description="Targeted initiatives building digital skills at every level — from schools and communities to organisations and workforce teams."
+        description="Targeted initiatives building digital skills at every level, from schools and communities to organisations and workforce teams."
       />
 
       {/* Programme Grid */}
