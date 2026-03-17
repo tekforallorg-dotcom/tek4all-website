@@ -54,6 +54,10 @@ export const metadata: Metadata = {
       "Equipping underserved communities and organisations with future-ready digital skills and tools to thrive.",
   },
   robots: { index: true, follow: true },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
