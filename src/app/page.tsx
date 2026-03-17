@@ -268,10 +268,22 @@ export default async function HomePage() {
               </Link>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <div className="rounded-2xl p-8 aspect-[4/3] flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                <p className="font-[family-name:var(--font-heading)] text-lg text-center" style={{ color: "rgba(255,255,255,0.2)" }}>
-                  MoonDesk Dashboard Preview<br /><span className="text-sm" style={{ color: "rgba(255,255,255,0.12)" }}>Coming soon</span>
-                </p>
+              <div className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+                <Image
+                  src="/images/moondesk-preview.png"
+                  alt="MoonDesk — AI-powered programme management dashboard"
+                  width={800}
+                  height={500}
+                  className="w-full h-auto rounded-2xl"
+                  style={{ opacity: 0.85 }}
+                />
+                {/* Soft fade edges to blend into dark background */}
+                <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{
+                  background: "linear-gradient(to bottom, rgba(13,20,26,0.3) 0%, transparent 15%, transparent 80%, rgba(13,20,26,0.6) 100%)",
+                }} />
+                <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{
+                  background: "linear-gradient(to right, rgba(13,20,26,0.4) 0%, transparent 10%, transparent 90%, rgba(13,20,26,0.4) 100%)",
+                }} />
               </div>
             </FadeIn>
           </div>

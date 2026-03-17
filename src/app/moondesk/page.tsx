@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Layers, ListChecks, Paperclip, LayoutDashboard, ShieldCheck } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { PageHero } from "@/components/ui/PageHero";
@@ -29,6 +30,28 @@ export default function MoonDeskPage() {
           Get Early Access <ArrowRight size={16} />
         </Link>
       </PageHero>
+
+      {/* Dashboard Preview */}
+      <section style={{ backgroundColor: "#0d141a" }} className="pb-16 md:pb-24 -mt-1">
+        <div className="mx-auto max-w-5xl px-6">
+          <FadeIn>
+            <div className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+              <Image
+                src="/images/moondesk-preview.png"
+                alt="MoonDesk dashboard — programme management interface"
+                width={1200}
+                height={750}
+                className="w-full h-auto"
+                style={{ opacity: 0.9 }}
+                priority
+              />
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "linear-gradient(to bottom, rgba(13,20,26,0.2) 0%, transparent 10%, transparent 85%, rgba(13,20,26,0.5) 100%)",
+              }} />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* Features */}
       <section className="bg-off-white py-16 md:py-24">
