@@ -65,7 +65,7 @@ export default async function ProgrammesPage() {
                     prog.slug === "corporate-training"
                       ? "/corporate-training"
                       : prog.slug === "moondesk"
-                      ? "/moondesk"
+                      ? "https://moondesk.tekforall.org"
                       : `/programmes/${prog.slug}`
                   }
                   className="group block bg-white rounded-2xl overflow-hidden h-full shadow-sm hover:shadow-lg transition-all"

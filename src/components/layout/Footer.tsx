@@ -22,7 +22,7 @@ const PROGRAMME_LINKS = [
   { href: "/programmes/tek4teachers", label: "Tek4Teachers" },
   { href: "/programmes/nextgen-innovators", label: "NextGen Innovators" },
   { href: "/corporate-training", label: "Corporate Training" },
-  { href: "/moondesk", label: "MoonDesk" },
+  { href: "https://moondesk.tekforall.org", label: "MoonDesk" },
 ];
 
 export function Footer() {

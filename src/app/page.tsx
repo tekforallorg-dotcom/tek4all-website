@@ -158,7 +158,7 @@ export default async function HomePage() {
               {programmes.slice(0, 4).map((prog, i) => (
                 <FadeIn key={prog.id} delay={i * 0.1}>
                   <Link
-                    href={prog.slug === "corporate-training" ? "/corporate-training" : prog.slug === "moondesk" ? "/moondesk" : `/programmes/${prog.slug}`}
+                    href={prog.slug === "corporate-training" ? "/corporate-training" : prog.slug === "moondesk" ? "https://moondesk.tekforall.org" : `/programmes/${prog.slug}`}
                     className="group block rounded-2xl overflow-hidden hover:shadow-lg transition-all"
                     style={{ backgroundColor: "#f2f2f2" }}
                   >
@@ -248,42 +248,53 @@ export default async function HomePage() {
       </section>
 
       {/* ===== MOONDESK TEASER ===== */}
-      <section style={{ backgroundColor: "#0d141a" }} className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="relative overflow-hidden" style={{ backgroundColor: "#0d141a" }}>
+        {/* Subtle ambient glow */}
+        <div className="absolute pointer-events-none" style={{ top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(50,55,65,0.4) 0%, transparent 70%)" }} aria-hidden="true" />
+
+        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            {/* Text */}
             <FadeIn>
               <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Product</p>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">MoonDesk</h2>
-              <p style={{ color: "rgba(255,255,255,0.6)" }} className="text-xl mb-6 leading-relaxed">AI-powered programme management built for NGOs, programme teams, and mission-driven organisations.</p>
-              <ul className="space-y-4 mb-8">
-                {["Programmes & workstreams — structured, manageable hierarchies", "Task management — assign, track, and report in real time", "Evidence & attachments — link proof of impact directly to tasks", "Reporting dashboards — high-visibility views across all projects"].map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-                    <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.3)" }} />
+              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">MoonDesk</h2>
+              <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium text-white/70 mb-5">AI-Powered Programme Management</p>
+              <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">Built for NGOs, programme teams, and mission-driven organisations.</p>
+              <ul className="space-y-3 mb-8">
+                {["Clear ownership and timelines", "Task completion with evidence linked to work", "AI assistant that understands your programmes", "CRM and opportunity tracking built in"].map((f) => (
+                  <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.4)" }} />
                     {f}
                   </li>
                 ))}
               </ul>
-              <Link href="/moondesk" className="bg-white text-near-black px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2">
-                Learn More <ArrowRight size={16} />
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
+                  Book a Demo <ArrowRight size={14} />
+                </a>
+                <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
+                  Explore Features
+                </a>
+              </div>
             </FadeIn>
+
+            {/* Product mockup — clean, frameless, floating */}
             <FadeIn delay={0.2}>
-              <div className="relative rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
-                <Image
-                  src="/images/moondesk-preview.png"
-                  alt="MoonDesk — AI-powered programme management dashboard"
-                  width={800}
-                  height={500}
-                  className="w-full h-auto rounded-2xl"
-                  style={{ opacity: 0.85 }}
-                />
-                {/* Soft fade edges to blend into dark background */}
-                <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{
-                  background: "linear-gradient(to bottom, rgba(13,20,26,0.3) 0%, transparent 15%, transparent 80%, rgba(13,20,26,0.6) 100%)",
-                }} />
-                <div className="absolute inset-0 pointer-events-none rounded-2xl" style={{
-                  background: "linear-gradient(to right, rgba(13,20,26,0.4) 0%, transparent 10%, transparent 90%, rgba(13,20,26,0.4) 100%)",
-                }} />
+              <div className="relative lg:-mr-12 xl:-mr-20">
+                {/* Desktop mockup */}
+                <div className="relative" style={{ filter: "drop-shadow(0 25px 60px rgba(0,0,0,0.5))" }}>
+                  <div className="rounded-xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
+                    <Image
+                      src="/images/moondesk-preview.png"
+                      alt="MoonDesk dashboard"
+                      width={800}
+                      height={500}
+                      className="w-full h-auto block"
+                    />
+                  </div>
+                </div>
+                {/* Soft bottom fade so it doesn't have a hard edge */}
+                <div className="absolute -bottom-4 left-0 right-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to top, #0d141a, transparent)" }} aria-hidden="true" />
               </div>
             </FadeIn>
           </div>

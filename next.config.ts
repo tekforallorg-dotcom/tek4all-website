@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
       { source: "/blog-list", destination: "/blog", permanent: true },
       { source: "/programs", destination: "/programmes", permanent: true },
       { source: "/partnership", destination: "/partnerships", permanent: true },
+      { source: "/moondesk", destination: "https://moondesk.tekforall.org", permanent: false },
     ];
   },
 };
