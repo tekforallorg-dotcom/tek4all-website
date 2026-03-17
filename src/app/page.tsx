@@ -395,24 +395,25 @@ export default async function HomePage() {
 
       {/* ===== PARTNER LOGOS (from Supabase) ===== */}
       {partners.length > 0 && (
-        <section className="py-14 md:py-16" style={{ background: "linear-gradient(135deg, #0d141a 0%, #1d1e20 100%)" }}>
+        <section className="py-14 md:py-16" style={{ backgroundColor: "#ffffff", borderTop: "1px solid #f2f2f2", borderBottom: "1px solid #f2f2f2" }}>
           <div className="mx-auto max-w-7xl px-6">
             <FadeIn className="text-center mb-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold text-white mb-2">Our Partners & Supporters</h2>
+              <p className="text-xs font-medium uppercase mb-2" style={{ fontFamily: "var(--font-inter), sans-serif", letterSpacing: "0.15em", color: "rgba(0,0,0,0.35)" }}>Trusted By</p>
+              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold" style={{ color: "#111" }}>Our Partners & Supporters</h2>
             </FadeIn>
-            <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
+            <div className="flex items-center justify-center gap-10 md:gap-14 flex-wrap">
               {partners.map((partner) => (
                 <FadeIn key={partner.id}>
                   {partner.website_url ? (
-                    <a href={partner.website_url} target="_blank" rel="noopener noreferrer" className="block opacity-70 hover:opacity-100 transition-opacity" title={partner.name}>
-                      <div className="relative h-10 w-24 md:w-28">
-                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain brightness-0 invert" />
+                    <a href={partner.website_url} target="_blank" rel="noopener noreferrer" className="block opacity-60 hover:opacity-100 transition-opacity" title={partner.name}>
+                      <div className="relative h-12 w-28 md:w-32">
+                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain" />
                       </div>
                     </a>
                   ) : (
-                    <div className="opacity-70" title={partner.name}>
-                      <div className="relative h-10 w-24 md:w-28">
-                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain brightness-0 invert" />
+                    <div className="opacity-60" title={partner.name}>
+                      <div className="relative h-12 w-28 md:w-32">
+                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain" />
                       </div>
                     </div>
                   )}
