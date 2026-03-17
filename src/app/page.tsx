@@ -248,48 +248,49 @@ export default async function HomePage() {
       </section>
 
       {/* ===== MOONDESK TEASER ===== */}
-      <section className="relative overflow-hidden" style={{ backgroundColor: "#0d141a" }}>
+      <section className="relative" style={{ backgroundColor: "#0d141a" }}>
         {/* Subtle ambient glow */}
         <div className="absolute pointer-events-none" style={{ top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(50,55,65,0.4) 0%, transparent 70%)" }} aria-hidden="true" />
 
-        <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 md:pt-20 md:pb-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
             {/* Text */}
             <FadeIn>
-              <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Product</p>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">MoonDesk</h2>
-              <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium text-white/70 mb-5">AI-Powered Programme Management</p>
-              <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">Built for NGOs, programme teams, and mission-driven organisations.</p>
-              <ul className="space-y-3 mb-8">
-                {["Clear ownership and timelines", "Task completion with evidence linked to work", "AI assistant that understands your programmes", "CRM and opportunity tracking built in"].map((f) => (
-                  <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
-                    <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.4)" }} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-3">
-                <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
-                  Book a Demo <ArrowRight size={14} />
-                </a>
-                <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
-                  Explore Features
-                </a>
+              <div className="lg:sticky lg:top-32 lg:py-8">
+                <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Product</p>
+                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">MoonDesk</h2>
+                <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium mb-5" style={{ color: "rgba(255,255,255,0.65)" }}>AI-Powered Programme Management</p>
+                <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">Built for NGOs, programme teams, and mission-driven organisations.</p>
+                <ul className="space-y-3 mb-8">
+                  {["Clear ownership and timelines", "Task completion with evidence linked to work", "AI assistant that understands your programmes", "CRM and opportunity tracking built in"].map((f) => (
+                    <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.4)" }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-3">
+                  <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
+                    Book a Demo <ArrowRight size={14} />
+                  </a>
+                  <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
+                    Explore Features
+                  </a>
+                </div>
               </div>
             </FadeIn>
 
-            {/* Product mockup — clean, frameless, floating */}
+            {/* Product mockup — phone pops out below section */}
             <FadeIn delay={0.2}>
-              <div className="relative">
-                <div className="relative rounded-xl overflow-hidden" style={{ filter: "drop-shadow(0 20px 50px rgba(0,0,0,0.4))" }}>
-                  <Image
-                    src="/images/moondesk-preview.png"
-                    alt="MoonDesk dashboard"
-                    width={800}
-                    height={500}
-                    className="w-full h-auto block"
-                  />
-                </div>
+              <div className="relative" style={{ marginBottom: "-80px" }}>
+                <Image
+                  src="/images/moondesk-preview.png"
+                  alt="MoonDesk dashboard — desktop and mobile"
+                  width={800}
+                  height={600}
+                  className="w-full h-auto block relative"
+                  style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.3))" }}
+                />
               </div>
             </FadeIn>
           </div>
@@ -297,7 +298,7 @@ export default async function HomePage() {
       </section>
 
       {/* ===== GALLERY TEASER (from Supabase or fallback) ===== */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-white py-16 md:py-20" style={{ paddingTop: "120px" }}>
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
