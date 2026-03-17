@@ -225,7 +225,8 @@ export default async function HomePage() {
             <div>
               <p className="text-mid-gray text-xs font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-2">B2B Services</p>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Corporate Training</h2>
-              <p className="text-mid-gray text-lg max-w-xl">Upskill your workforce with practical AI, data, and digital transformation training.</p>
+              <p className="font-[family-name:var(--font-heading)] text-lg font-medium text-near-black/70 mb-2">The 2-Win Story: Maximise Capacity, Enable Social Impact.</p>
+              <p className="text-mid-gray text-base max-w-xl">Upskill your workforce with practical AI, data, and digital transformation training.</p>
             </div>
             <Link href="/corporate-training" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
               Learn More <ArrowRight size={16} />
