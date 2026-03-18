@@ -28,15 +28,15 @@ interface AdminSidebarProps {
 }
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, roles: ["super_admin", "site_admin", "blog_editor"] },
-  { href: "/admin/programmes", label: "Programmes", icon: FileText, roles: ["super_admin", "site_admin"] },
-  { href: "/admin/team", label: "Team", icon: Users, roles: ["super_admin", "site_admin"] },
-  { href: "/admin/partners", label: "Partners", icon: Handshake, roles: ["super_admin", "site_admin"] },
+  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, roles: ["super_admin"] },
+  { href: "/admin/programmes", label: "Programmes", icon: FileText, roles: ["super_admin"] },
+  { href: "/admin/team", label: "Team", icon: Users, roles: ["super_admin"] },
+  { href: "/admin/partners", label: "Partners", icon: Handshake, roles: ["super_admin"] },
   { href: "/admin/gallery", label: "Gallery", icon: ImageIcon, roles: ["super_admin", "site_admin"] },
   { href: "/admin/blog", label: "Blog", icon: BookOpen, roles: ["super_admin", "site_admin", "blog_editor"] },
-  { href: "/admin/stats", label: "Impact Stats", icon: BarChart3, roles: ["super_admin", "site_admin"] },
-  { href: "/admin/social", label: "Social Posts", icon: Share2, roles: ["super_admin", "site_admin"] },
-  { href: "/admin/forms", label: "Submissions", icon: MessageSquare, roles: ["super_admin", "site_admin"] },
+  { href: "/admin/stats", label: "Impact Stats", icon: BarChart3, roles: ["super_admin"] },
+  { href: "/admin/social", label: "Social Posts", icon: Share2, roles: ["super_admin"] },
+  { href: "/admin/forms", label: "Submissions", icon: MessageSquare, roles: ["super_admin"] },
   { href: "/admin/settings", label: "Settings", icon: Settings, roles: ["super_admin"] },
 ];
 

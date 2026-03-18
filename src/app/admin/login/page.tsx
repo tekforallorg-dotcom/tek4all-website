@@ -40,11 +40,11 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Image
-            src="/images/tek4all-logo.jpg"
+            src="/images/tek4all-logo-white.png"
             alt="Tek4All"
             width={160}
             height={48}
-            className="h-12 w-auto mx-auto brightness-0 invert mb-4"
+            className="h-12 w-auto mx-auto mb-4"
           />
           <h1 className="font-[family-name:var(--font-heading)] text-2xl font-bold text-white">
             Admin Login
