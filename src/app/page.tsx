@@ -82,7 +82,7 @@ export default async function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 text-center text-white pt-20">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 max-w-4xl mx-auto">
-            Skilling Lives,<br />Uplifting Minds
+            Skilling Lives,<br />Uplifting Minds.
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
             Equipping underserved communities and organisations with the digital skills and tools to thrive in the AI era.
