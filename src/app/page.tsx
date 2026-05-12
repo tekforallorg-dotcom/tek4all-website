@@ -37,7 +37,7 @@ const GALLERY_FALLBACK = [
 ];
 
 /* ============================================
-   PAGE — fetches all dynamic content
+   PAGE - fetches all dynamic content
    ============================================ */
 
 export default async function HomePage() {
@@ -211,7 +211,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== SABITEK — LEARNING INFRASTRUCTURE ===== */}
+      {/* ===== SABITEK - LEARNING INFRASTRUCTURE ===== */}
       <section className="relative" style={{ backgroundColor: "#0d141a" }}>
         <div className="absolute pointer-events-none" style={{ top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(50,55,65,0.4) 0%, transparent 70%)" }} aria-hidden="true" />
 
@@ -251,7 +251,7 @@ export default async function HomePage() {
               <div className="relative" style={{ marginBottom: "-80px" }}>
                 <Image
                   src="/images/sabitek-preview.png"
-                  alt="Sabitek — AI-powered learning management platform"
+                  alt="Sabitek - AI-powered learning management platform"
                   width={800}
                   height={600}
                   className="w-full h-auto block relative"

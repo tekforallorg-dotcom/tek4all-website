@@ -66,7 +66,7 @@ export default function TermsPage() {
                 <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold text-near-black mb-3">4. Intellectual Property</h2>
                 <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-near-black mb-2">4.1 Tek4All Content</h3>
                 <p className="text-mid-gray leading-relaxed mb-3">
-                  All content on this website — including but not limited to text, graphics, logos, images, photographs, videos, data, software, and design — is the property of Tek4All or its content suppliers and is protected by Nigerian and international intellectual property laws. The Tek4All name, logo, and &ldquo;Skilling Lives, Uplifting Minds&rdquo; tagline are proprietary marks of Technology for All Initiative.
+                  All content on this website, including but not limited to text, graphics, logos, images, photographs, videos, data, software, and design, is the property of Tek4All or its content suppliers and is protected by Nigerian and international intellectual property laws. The Tek4All name, logo, and &ldquo;Skilling Lives, Uplifting Minds&rdquo; tagline are proprietary marks of Technology for All Initiative.
                 </p>
 
                 <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-near-black mb-2 mt-6">4.2 Limited Licence</h3>
@@ -130,7 +130,7 @@ export default function TermsPage() {
               <div>
                 <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold text-near-black mb-3">10. Safeguarding</h2>
                 <p className="text-mid-gray leading-relaxed">
-                  Tek4All is committed to safeguarding children, young people, and vulnerable adults. All interactions facilitated through this website — including volunteer applications, programme participation, and community engagement — are subject to our safeguarding policies. If you become aware of any safeguarding concern involving Tek4All activities, please report it immediately to <a href="mailto:impact@tekforall.org" className="text-near-black underline">impact@tekforall.org</a>.
+                  Tek4All is committed to safeguarding children, young people, and vulnerable adults. All interactions facilitated through this website, including volunteer applications, programme participation, and community engagement, are subject to our safeguarding policies. If you become aware of any safeguarding concern involving Tek4All activities, please report it immediately to <a href="mailto:impact@tekforall.org" className="text-near-black underline">impact@tekforall.org</a>.
                 </p>
               </div>
 

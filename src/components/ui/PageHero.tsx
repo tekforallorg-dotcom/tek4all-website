@@ -16,7 +16,7 @@ export function PageHero({ eyebrow, title, description, children }: PageHeroProp
       className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden"
       style={{ backgroundColor: "#0d141a" }}
     >
-      {/* Gradient blobs — inline styles because Tailwind v4 can't resolve custom color + opacity */}
+      {/* Gradient blobs - inline styles because Tailwind v4 can't resolve custom color + opacity */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
           className="absolute rounded-full"

@@ -6,7 +6,7 @@ import Link from "next/link";
 export default async function AdminDashboard() {
   const supabase = await createServerSupabaseClient();
 
-  // Check role — non-super_admin gets redirected
+  // Check role - non-super_admin gets redirected
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/admin/login");
 
@@ -22,7 +22,7 @@ export default async function AdminDashboard() {
   if (profile.role === "blog_editor") redirect("/admin/blog");
   if (profile.role === "site_admin") redirect("/admin/blog");
 
-  // Super admin — fetch all stats
+  // Super admin - fetch all stats
   const [programmes, team, partners, albums, photos, posts, forms, unreadForms, socialPosts, stats, recentForms] = await Promise.all([
     supabase.from("programmes").select("id", { count: "exact", head: true }),
     supabase.from("team_members").select("id", { count: "exact", head: true }),
@@ -130,7 +130,7 @@ export default async function AdminDashboard() {
         </Link>
       </div>
 
-      {/* Content grid — clickable cards */}
+      {/* Content grid - clickable cards */}
       <div className="mb-8">
         <h2 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-4">Content</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

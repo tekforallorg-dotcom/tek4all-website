@@ -17,7 +17,7 @@ const PARTNERSHIP_TYPES = [
     icon: Gift,
     title: "Donations & In-Kind Support",
     description:
-      "Cash or in-kind contributions — laptops, tablets, internet devices, learning materials — from individuals, corporates, and institutions. Every contribution directly reaches communities.",
+      "Cash or in-kind contributions (laptops, tablets, internet devices, learning materials) from individuals, corporates, and institutions. Every contribution directly reaches communities.",
   },
   {
     icon: Heart,

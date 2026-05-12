@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/programmes", label: "Programmes" },
   { href: "/partnerships", label: "Partnerships" },
+  { href: "/funding", label: "Funding" },
   { href: "/gallery", label: "Gallery" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
@@ -155,7 +156,7 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile menu — completely separate portal-like overlay */}
+      {/* Mobile menu - completely separate portal-like overlay */}
       {isMobileOpen && (
         <div
           className="lg:hidden site-mobile-menu"

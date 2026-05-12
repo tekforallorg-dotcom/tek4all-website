@@ -30,7 +30,7 @@ const AUDIENCES = [
   { icon: GraduationCap, title: "Teachers", description: "AI workflows and data skills to transform classroom delivery.", stat: "69+" },
   { icon: School, title: "Secondary Schools", description: "Integrating STEM into curricula with resources and training.", stat: "4" },
   { icon: Building2, title: "Low-income Communities", description: "Tech hubs, mentorship, career pathways, and connectivity.", stat: "1,850+" },
-  { icon: Users, title: "NGOs & Programme Teams", description: "Tools, training, and systems for operational excellence.", stat: "—" },
+  { icon: Users, title: "NGOs & Programme Teams", description: "Tools, training, and systems for operational excellence.", stat: "" },
 ];
 
 export default async function AboutPage() {
@@ -51,7 +51,7 @@ export default async function AboutPage() {
         description="We equip underserved communities with future-ready digital skills, empowering individuals and organisations to thrive in the digital economy."
       />
 
-      {/* Mission & Vision — editorial two-column */}
+      {/* Mission & Vision - editorial two-column */}
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid md:grid-cols-2 gap-0 md:gap-0">
@@ -71,7 +71,7 @@ export default async function AboutPage() {
                   <p className="text-mid-gray leading-relaxed">
                     A dedication to fair and equitable access to technology, empowering
                     all Nigerians to thrive through inclusive opportunities, digital
-                    education, and connectivity — unlocking the potential of
+                    education, and connectivity, unlocking the potential of
                     marginalised populations and fostering inclusive socio-economic
                     development.
                   </p>
@@ -115,7 +115,7 @@ export default async function AboutPage() {
         <div className="absolute inset-0 bg-deep-black/20" />
       </section>
 
-      {/* Values — with icons */}
+      {/* Values - with icons */}
       <section className="bg-off-white py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="text-center mb-12">
@@ -146,7 +146,7 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* Who We Serve — dark with stats */}
+      {/* Who We Serve - dark with stats */}
       <section className="relative bg-deep-black py-16 md:py-24 overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-charcoal/30 rounded-full blur-[150px]" />

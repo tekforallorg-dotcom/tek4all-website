@@ -24,7 +24,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tek4All — Skilling Lives, Uplifting Minds",
+    default: "Tek4All | Skilling Lives, Uplifting Minds",
     template: "%s | Tek4All",
   },
   description:
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
     locale: "en_NG",
     url: "https://tekforall.org",
     siteName: "Tek4All",
-    title: "Tek4All — Skilling Lives, Uplifting Minds",
+    title: "Tek4All | Skilling Lives, Uplifting Minds",
     description:
       "Equipping underserved communities and organisations with future-ready digital skills and tools to thrive.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tek4All — Skilling Lives, Uplifting Minds",
+    title: "Tek4All | Skilling Lives, Uplifting Minds",
     description:
       "Equipping underserved communities and organisations with future-ready digital skills and tools to thrive.",
   },

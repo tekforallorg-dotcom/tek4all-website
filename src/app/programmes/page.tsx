@@ -39,13 +39,13 @@ export default async function ProgrammesPage() {
       <PageHero
         eyebrow="What We Do"
         title="Our Programmes"
-        description="Targeted initiatives building digital skills at every level — from schools and communities to organisations and workforce teams."
+        description="Targeted initiatives building digital skills at every level, from schools and communities to organisations and workforce teams."
       />
 
       {/* Programme Grid */}
       <section className="bg-off-white py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
-          {/* Category tags (static — client filtering can be added later) */}
+          {/* Category tags (static - client filtering can be added later) */}
           <FadeIn className="flex flex-wrap gap-2 mb-12">
             {CATEGORIES.map((cat) => (
               <span
