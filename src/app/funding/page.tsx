@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, GraduationCap, Globe, Smartphone, Brain, Server, Code, Layers, Zap, CheckCircle } from "lucide-react";
+import { ArrowRight, GraduationCap, Globe, Smartphone, Brain, Server, Code, Layers, CheckCircle } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { PageHero } from "@/components/ui/PageHero";
 import type { Metadata } from "next";
@@ -44,15 +43,12 @@ const SERVICES = [
   },
 ];
 
-const TECH_STACK = [
-  "Next.js", "React", "React Native", "TypeScript", "Tailwind CSS",
-  "Supabase", "PostgreSQL", "Vercel", "Node.js", "Python",
-  "Figma", "Git", "REST APIs", "AI/ML Integration",
-];
-
 export default function FundingPage() {
   return (
     <>
+      {/* Hide the global "Join the Movement" CTA since this page has its own */}
+      <style>{`.gradient-cta { display: none !important; }`}</style>
+
       <PageHero
         eyebrow="Sustainability"
         title="How We Fund Our Mission"
@@ -141,30 +137,6 @@ export default function FundingPage() {
               </FadeIn>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Tech stack */}
-      <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-10">
-            <p className="text-xs font-medium uppercase tracking-wider mb-2 font-[family-name:var(--font-inter)]" style={{ color: "#6b7280" }}>Technical Expertise</p>
-            <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold text-near-black mb-3">
-              Our Stack
-            </h2>
-            <p className="text-mid-gray max-w-xl mx-auto">
-              Production-grade tools and frameworks we use every day.
-            </p>
-          </FadeIn>
-          <FadeIn>
-            <div className="flex flex-wrap justify-center gap-3">
-              {TECH_STACK.map((tech) => (
-                <span key={tech} className="px-5 py-2.5 rounded-full text-sm font-medium font-[family-name:var(--font-inter)] transition-colors hover:bg-near-black hover:text-white cursor-default" style={{ backgroundColor: "#f2f2f2", color: "#1d1e20" }}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </FadeIn>
         </div>
       </section>
 
