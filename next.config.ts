@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
       { source: "/programs", destination: "/programmes", permanent: true },
       { source: "/partnership", destination: "/partnerships", permanent: true },
       { source: "/moondesk", destination: "https://moondesk.tekforall.org", permanent: false },
+      { source: "/corporate-training", destination: "/funding", permanent: true },
+      { source: "/sabitek", destination: "https://sabitek.app", permanent: false },
     ];
   },
 };

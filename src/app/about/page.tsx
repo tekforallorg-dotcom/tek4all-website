@@ -71,7 +71,7 @@ export default async function AboutPage() {
                   <p className="text-mid-gray leading-relaxed">
                     A dedication to fair and equitable access to technology, empowering
                     all Nigerians to thrive through inclusive opportunities, digital
-                    education, and connectivity, unlocking the potential of
+                    education, and connectivity — unlocking the potential of
                     marginalised populations and fostering inclusive socio-economic
                     development.
                   </p>

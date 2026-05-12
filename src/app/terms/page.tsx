@@ -102,7 +102,7 @@ export default function TermsPage() {
 
                 <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-near-black mb-2 mt-6">6.3 MoonDesk</h3>
                 <p className="text-mid-gray leading-relaxed">
-                  MoonDesk is a separate product by Tek4All with its own terms of service available at moondesk.tekforall.org. Use of MoonDesk is governed by those terms, not these website Terms of Use.
+                  Sabitek and MoonDesk are separate products by Tek4All with their own terms of service available at sabitek.app and moondesk.tekforall.org respectively. Use of these products is governed by their own terms, not these website Terms of Use.
                 </p>
               </div>
 
@@ -151,7 +151,7 @@ export default function TermsPage() {
               <div>
                 <h2 className="font-[family-name:var(--font-heading)] text-xl font-bold text-near-black mb-3">13. External Links</h2>
                 <p className="text-mid-gray leading-relaxed">
-                  Our website may contain links to third-party websites, including but not limited to partner organisations, social media platforms (Instagram, LinkedIn), and MoonDesk (moondesk.tekforall.org). These links are provided for convenience and do not imply endorsement. Tek4All is not responsible for the content, privacy practices, or terms of use of any third-party website.
+                  Our website may contain links to third-party websites, including but not limited to partner organisations, social media platforms (Instagram, LinkedIn), Sabitek (sabitek.app), and MoonDesk (moondesk.tekforall.org). These links are provided for convenience and do not imply endorsement. Tek4All is not responsible for the content, privacy practices, or terms of use of any third-party website.
                 </p>
               </div>
 

@@ -21,8 +21,8 @@ const PROGRAMME_LINKS = [
   { href: "/programmes/women-in-tek", label: "Women-in-Tek" },
   { href: "/programmes/tek4teachers", label: "Tek4Teachers" },
   { href: "/programmes/nextgen-innovators", label: "NextGen Innovators" },
-  { href: "/corporate-training", label: "Corporate Training" },
-  { href: "https://moondesk.tekforall.org", label: "MoonDesk" },
+  { href: "/funding", label: "Funding & Services" },
+  { href: "https://sabitek.app", label: "Sabitek" },
 ];
 
 export function Footer() {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Monitor, Wifi, Users, Brain, BarChart3, Shield, Sparkles, ChevronRight, Instagram, Linkedin, ExternalLink } from "lucide-react";
+import { ArrowRight, Monitor, Wifi, Users, ChevronRight, Instagram, Linkedin, ExternalLink, GraduationCap, BookOpen, Bot, Award } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -24,13 +24,6 @@ const PIPELINE_STEPS = [
   { step: "02", title: "NextGen AI Club", description: "Structured learning communities for students to deepen skills and practice regularly." },
   { step: "03", title: "Projects / Festival", description: "Applying skills to solve community problems and showcasing at the AI4Good Festival." },
   { step: "04", title: "Innovation Pathway", description: "Advanced mentorship, internships, and career readiness for top talent." },
-];
-
-const B2B_SERVICES = [
-  { icon: Brain, title: "AI for Work & Operations", description: "Streamlining workflows and automating routine tasks for operational efficiency." },
-  { icon: BarChart3, title: "Data Literacy & Dashboards", description: "Turning raw data into actionable insights and visual stories." },
-  { icon: Sparkles, title: "Change Enablement", description: "Strategies to drive adoption and manage the cultural shift to digital." },
-  { icon: Shield, title: "Responsible & Secure AI", description: "Navigating ethics, privacy, and security in the age of intelligence." },
 ];
 
 const ZYRO_BASE = "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/";
@@ -82,7 +75,7 @@ export default async function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 text-center text-white pt-20">
           <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 max-w-4xl mx-auto">
-            Skilling Lives,<br />Uplifting Minds.
+            Skilling Lives,<br />Uplifting Minds
           </h1>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
             Equipping underserved communities and organisations with the digital skills and tools to thrive in the AI era.
@@ -158,7 +151,7 @@ export default async function HomePage() {
               {programmes.slice(0, 4).map((prog, i) => (
                 <FadeIn key={prog.id} delay={i * 0.1}>
                   <Link
-                    href={prog.slug === "corporate-training" ? "/corporate-training" : prog.slug === "moondesk" ? "https://moondesk.tekforall.org" : `/programmes/${prog.slug}`}
+                    href={`/programmes/${prog.slug}`}
                     className="group block rounded-2xl overflow-hidden hover:shadow-lg transition-all"
                     style={{ backgroundColor: "#f2f2f2" }}
                   >
@@ -218,75 +211,47 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ===== B2B CORPORATE TRAINING ===== */}
-      <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <p className="text-mid-gray text-xs font-medium font-[family-name:var(--font-inter)] uppercase tracking-wider mb-2">B2B Services</p>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Corporate Training</h2>
-              <p className="font-[family-name:var(--font-heading)] text-lg font-medium text-near-black/70 mb-2">The 2-Win Story: Maximise Capacity, Enable Social Impact.</p>
-              <p className="text-mid-gray text-base max-w-xl">Upskill your workforce with practical AI, data, and digital transformation training.</p>
-            </div>
-            <Link href="/corporate-training" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-              Learn More <ArrowRight size={16} />
-            </Link>
-          </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {B2B_SERVICES.map((svc, i) => (
-              <FadeIn key={svc.title} delay={i * 0.1}>
-                <div className="bg-white rounded-2xl p-6 h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5" style={{ backgroundColor: "#f2f2f2" }}>
-                    <svc.icon size={20} className="text-near-black" />
-                  </div>
-                  <h3 className="font-[family-name:var(--font-heading)] text-base font-semibold text-near-black mb-2">{svc.title}</h3>
-                  <p className="text-mid-gray text-sm leading-relaxed">{svc.description}</p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== MOONDESK TEASER ===== */}
+      {/* ===== SABITEK — LEARNING INFRASTRUCTURE ===== */}
       <section className="relative" style={{ backgroundColor: "#0d141a" }}>
-        {/* Subtle ambient glow */}
         <div className="absolute pointer-events-none" style={{ top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(50,55,65,0.4) 0%, transparent 70%)" }} aria-hidden="true" />
 
         <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 md:pt-20 md:pb-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
-            {/* Text */}
             <FadeIn>
               <div className="lg:sticky lg:top-32 lg:py-8">
-                <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Product</p>
-                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">MoonDesk</h2>
-                <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium mb-5" style={{ color: "rgba(255,255,255,0.65)" }}>AI-Powered Programme Management</p>
-                <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">Built for NGOs, programme teams, and mission-driven organisations.</p>
-                <ul className="space-y-3 mb-8">
-                  {["Clear ownership and timelines", "Task completion with evidence linked to work", "AI assistant that understands your programmes", "CRM and opportunity tracking built in"].map((f) => (
-                    <li key={f} className="flex items-center gap-3 text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
-                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: "rgba(255,255,255,0.4)" }} />
-                      {f}
-                    </li>
+                <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Learning Infrastructure</p>
+                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">Sabitek</h2>
+                <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium mb-5" style={{ color: "rgba(255,255,255,0.65)" }}>Structured Learning, Powered by AI</p>
+                <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">The learning infrastructure we use to deliver training cohorts, run structured programmes, and ensure continuous learning across our communities.</p>
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  {[
+                    { icon: GraduationCap, label: "Structured courses & cohorts" },
+                    { icon: Bot, label: "AI-powered learning tools" },
+                    { icon: Award, label: "Verifiable certificates" },
+                    { icon: BookOpen, label: "Smart quiz generation" },
+                  ].map((f) => (
+                    <div key={f.label} className="flex items-start gap-2.5" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      <f.icon size={16} className="mt-0.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.4)" }} />
+                      <span className="text-sm leading-snug">{f.label}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <div className="flex flex-wrap gap-3">
-                  <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
-                    Book a Demo <ArrowRight size={14} />
+                  <a href="https://sabitek.app" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
+                    Get Started <ArrowRight size={14} />
                   </a>
-                  <a href="https://moondesk.tekforall.org" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
-                    Explore Features
+                  <a href="https://sabitek.app" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
+                    Explore Platform
                   </a>
                 </div>
               </div>
             </FadeIn>
 
-            {/* Product mockup — phone pops out below section */}
             <FadeIn delay={0.2}>
               <div className="relative" style={{ marginBottom: "-80px" }}>
                 <Image
-                  src="/images/moondesk-preview.png"
-                  alt="MoonDesk dashboard — desktop and mobile"
+                  src="/images/sabitek-preview.png"
+                  alt="Sabitek — AI-powered learning management platform"
                   width={800}
                   height={600}
                   className="w-full h-auto block relative"

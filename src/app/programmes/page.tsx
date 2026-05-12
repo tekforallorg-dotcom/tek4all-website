@@ -39,7 +39,7 @@ export default async function ProgrammesPage() {
       <PageHero
         eyebrow="What We Do"
         title="Our Programmes"
-        description="Targeted initiatives building digital skills at every level, from schools and communities to organisations and workforce teams."
+        description="Targeted initiatives building digital skills at every level — from schools and communities to organisations and workforce teams."
       />
 
       {/* Programme Grid */}
@@ -62,10 +62,8 @@ export default async function ProgrammesPage() {
               <FadeIn key={prog.id} delay={i * 0.06}>
                 <Link
                   href={
-                    prog.slug === "corporate-training"
-                      ? "/corporate-training"
-                      : prog.slug === "moondesk"
-                      ? "https://moondesk.tekforall.org"
+                    prog.slug === "moondesk"
+                      ? "https://sabitek.app"
                       : `/programmes/${prog.slug}`
                   }
                   className="group block bg-white rounded-2xl overflow-hidden h-full shadow-sm hover:shadow-lg transition-all"
