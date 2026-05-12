@@ -248,23 +248,18 @@ export default async function HomePage() {
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <div className="relative" style={{ marginBottom: "-60px", perspective: "1200px" }}>
-                <div style={{
-                  transform: "rotateY(-4deg) rotateX(2deg)",
-                  transformOrigin: "center center",
-                  transition: "transform 0.5s ease",
-                }}>
-                  <Image
-                    src="/images/sabitek-preview.png"
-                    alt="Sabitek learning platform on desktop and mobile"
-                    width={900}
-                    height={650}
-                    className="w-full h-auto block"
-                    style={{
-                      filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4)) drop-shadow(0 10px 20px rgba(0,0,0,0.2))",
-                    }}
-                  />
-                </div>
+              <div className="relative">
+                <Image
+                  src="/images/sabitek-preview.png"
+                  alt="Sabitek learning platform on desktop and mobile"
+                  width={900}
+                  height={650}
+                  className="w-full h-auto block"
+                  style={{
+                    filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
+                    borderRadius: "12px",
+                  }}
+                />
               </div>
             </FadeIn>
           </div>
@@ -272,7 +267,7 @@ export default async function HomePage() {
       </section>
 
       {/* ===== GALLERY TEASER (from Supabase or fallback) ===== */}
-      <section className="bg-white py-16 md:py-20" style={{ paddingTop: "100px" }}>
+      <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6">
           <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
