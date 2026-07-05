@@ -1,10 +1,9 @@
 import Link from "next/link";
 
 /*
- * Quest landing. Server component; all motion is CSS (quest.css).
- * Game language: emerald = journey, gold = achievement.
- * Gamification is shown, not claimed: player card with 7-axis radar and XP,
- * collectible class cards, quest-log mission trail, ascending level staircase.
+ * Quest landing, executive light. Server component; all motion is CSS.
+ * Black / White / Gold / Steel. Gold is scarce by rule: rules, dots, one
+ * period, the radar line, the XP fill, the final trail bead, the L5 crown.
  * Copy rule: no em dashes anywhere. Separators are middle dots or commas.
  */
 
@@ -96,47 +95,40 @@ function Icon({ name, size = 20 }: { name: string; size?: number }) {
   }
 }
 
-// Static 7-axis readiness radar (heptagon), matches the "7 dimensions" copy.
+// Static 7-axis readiness radar; graphite rings, brushed-gold data line.
 function Radar() {
   return (
-    <svg className="q-radar" width="230" height="164" viewBox="0 0 230 164" role="img" aria-label="Seven-dimension readiness radar">
-      <defs>
-        <radialGradient id="q-rglow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(52,211,153,0.28)" />
-          <stop offset="100%" stopColor="rgba(52,211,153,0)" />
-        </radialGradient>
-      </defs>
-      <g transform="translate(115,84)">
-        <circle r="70" fill="url(#q-rglow)" />
-        <g fill="none" stroke="rgba(255,255,255,0.12)">
-          <polygon points="0,-62 48.5,-38.7 60.4,13.8 26.9,55.9 -26.9,55.9 -60.4,13.8 -48.5,-38.7" />
-          <polygon points="0,-41 32.1,-25.6 39.9,9.1 17.8,37 -17.8,37 -39.9,9.1 -32.1,-25.6" />
-          <polygon points="0,-20.5 16,-12.8 19.9,4.6 8.9,18.4 -8.9,18.4 -19.9,4.6 -16,-12.8" />
+    <svg className="q-radar" width="230" height="158" viewBox="0 0 230 158" role="img" aria-label="Seven-dimension readiness radar">
+      <g transform="translate(115,81)">
+        <g fill="none" stroke="rgba(229,229,229,0.16)">
+          <polygon points="0,-60 46.9,-37.4 58.5,13.4 26,54.1 -26,54.1 -58.5,13.4 -46.9,-37.4" />
+          <polygon points="0,-39.6 31,-24.7 38.6,8.8 17.2,35.7 -17.2,35.7 -38.6,8.8 -31,-24.7" />
+          <polygon points="0,-19.8 15.5,-12.4 19.3,4.4 8.6,17.9 -8.6,17.9 -19.3,4.4 -15.5,-12.4" />
         </g>
-        <g stroke="rgba(255,255,255,0.07)">
-          <line x1="0" y1="0" x2="0" y2="-62" />
-          <line x1="0" y1="0" x2="48.5" y2="-38.7" />
-          <line x1="0" y1="0" x2="60.4" y2="13.8" />
-          <line x1="0" y1="0" x2="26.9" y2="55.9" />
-          <line x1="0" y1="0" x2="-26.9" y2="55.9" />
-          <line x1="0" y1="0" x2="-60.4" y2="13.8" />
-          <line x1="0" y1="0" x2="-48.5" y2="-38.7" />
+        <g stroke="rgba(229,229,229,0.09)">
+          <line x1="0" y1="0" x2="0" y2="-60" />
+          <line x1="0" y1="0" x2="46.9" y2="-37.4" />
+          <line x1="0" y1="0" x2="58.5" y2="13.4" />
+          <line x1="0" y1="0" x2="26" y2="54.1" />
+          <line x1="0" y1="0" x2="-26" y2="54.1" />
+          <line x1="0" y1="0" x2="-58.5" y2="13.4" />
+          <line x1="0" y1="0" x2="-46.9" y2="-37.4" />
         </g>
         <polygon
-          points="0,-48.4 26.7,-21.3 51.3,11.7 12.1,25.2 -17.5,36.3 -30.2,6.9 -34,-27.1"
-          fill="rgba(52,211,153,0.26)"
-          stroke="#34d399"
-          strokeWidth="1.7"
+          points="0,-46.8 25.8,-20.6 49.7,11.4 11.7,24.3 -16.9,35.1 -29.2,6.7 -32.8,-26.2"
+          fill="rgba(200,169,107,0.16)"
+          stroke="#c8a96b"
+          strokeWidth="1.6"
           strokeLinejoin="round"
         />
-        <g fill="#6ee7b7">
-          <circle cx="0" cy="-48.4" r="2.7" />
-          <circle cx="26.7" cy="-21.3" r="2.7" />
-          <circle cx="51.3" cy="11.7" r="2.7" />
-          <circle cx="12.1" cy="25.2" r="2.7" />
-          <circle cx="-17.5" cy="36.3" r="2.7" />
-          <circle cx="-30.2" cy="6.9" r="2.7" />
-          <circle cx="-34" cy="-27.1" r="2.7" />
+        <g fill="#c8a96b">
+          <circle cx="0" cy="-46.8" r="2.5" />
+          <circle cx="25.8" cy="-20.6" r="2.5" />
+          <circle cx="49.7" cy="11.4" r="2.5" />
+          <circle cx="11.7" cy="24.3" r="2.5" />
+          <circle cx="-16.9" cy="35.1" r="2.5" />
+          <circle cx="-29.2" cy="6.7" r="2.5" />
+          <circle cx="-32.8" cy="-26.2" r="2.5" />
         </g>
       </g>
     </svg>
@@ -146,27 +138,24 @@ function Radar() {
 export default function QuestLandingPage() {
   return (
     <>
-      <div className="q-aurora" aria-hidden="true" />
-      <div className="q-grid" aria-hidden="true" />
-      <div className="q-grain" aria-hidden="true" />
-      <div className="q-vignette" aria-hidden="true" />
+      <div className="q-clouds" aria-hidden="true" />
 
       <header className="q-top">
         <div className="qwrap">
           <div className="q-brand">
             <span className="q-mark">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4Z" />
                 <path d="m9 12 2 2 4-4.5" />
               </svg>
             </span>
             <b>AI Readiness Quest</b>
-            <span className="q-chip-by">by Tek4All</span>
+            <span className="q-by">by Tek4All</span>
           </div>
           <Link className="q-ghost" href="/">
             tekforall.org
             <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-              <path d="M3 9 9 3M4.5 3H9v4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 9 9 3M4.5 3H9v4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Link>
         </div>
@@ -177,19 +166,27 @@ export default function QuestLandingPage() {
         <section className="q-hero">
           <div className="qwrap q-hero-grid">
             <div>
-              <span className="q-eyebrow q-rise">
-                <span className="q-dot" />
-                For African NGOs &nbsp;&middot;&nbsp; NDPA-aware &nbsp;&middot;&nbsp; Free
-              </span>
+              <div className="q-cred q-rise">
+                <span className="q-cred-rule" />
+                <span className="q-cred-text">
+                  For African development teams
+                  <span className="q-kdot" />
+                  NDPA-aware
+                  <span className="q-kdot" />
+                  Free
+                </span>
+              </div>
               <h1 className="q-display q-rise" style={{ animationDelay: "0.08s" }}>
-                Not a score.
+                <span className="q-ln1">Not a score.</span>
                 <br />
-                <span className="q-grad">A first move.</span>
+                <span className="q-ln2">
+                  A first move<span className="q-gdot">.</span>
+                </span>
               </h1>
               <p className="q-lede q-rise" style={{ animationDelay: "0.16s" }}>
-                A gamified diagnostic that finds where AI actually helps your
-                organisation first, without wasting money, exposing data, or
-                chasing hype.
+                A premium AI readiness diagnostic that helps development
+                organisations discover where AI and automation can improve work
+                first, without wasting money, exposing data, or chasing hype.
               </p>
               <div className="q-cta-row q-rise" style={{ animationDelay: "0.24s" }}>
                 <a className="q-cta" href="#missions">
@@ -198,28 +195,25 @@ export default function QuestLandingPage() {
                     <path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </a>
-                <a className="q-cta-2" href="#missions">
-                  See how it plays
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M6 4v8l6-4-6-4Z" fill="currentColor" />
-                  </svg>
-                </a>
+                <a className="q-cta-2" href="#missions">See how it works</a>
               </div>
               <div className="q-microrow q-rise" style={{ animationDelay: "0.3s" }}>
                 <span className="q-micro"><b>~12 min</b> to finish</span>
+                <span className="q-mdot" />
                 <span className="q-micro"><b>Instant</b> report</span>
+                <span className="q-mdot" />
                 <span className="q-micro"><b>No signup</b> to start</span>
               </div>
             </div>
 
-            {/* player card: the product glimpse */}
-            <div className="q-playercard">
+            {/* intelligence panel */}
+            <div className="q-panel">
               <div className="q-pc-top">
                 <span className="q-pc-idx">CLASS 03 / 06</span>
                 <span className="q-pc-lvl">LVL 3 &middot; Workflow Builder</span>
               </div>
               <div className="q-pc-medal">
-                <Icon name="flame" size={26} />
+                <Icon name="flame" size={24} />
               </div>
               <div className="q-pc-class">The Deadline Firefighter</div>
               <div className="q-pc-sub">
@@ -248,8 +242,11 @@ export default function QuestLandingPage() {
         {/* class cards */}
         <section className="q-block">
           <div className="qwrap q-center">
-            <div className="q-hair" />
-            <p className="q-kicker" style={{ marginTop: 26 }}>Choose your class</p>
+            <p className="q-kicker">
+              <span className="q-krule" />
+              <span>Choose your class</span>
+              <span className="q-krule" />
+            </p>
             <h2 className="q-sec">Which one is you?</h2>
             <p className="q-sub">
               The Quest opens with a choice, not a form. Pick the reality that
@@ -274,17 +271,20 @@ export default function QuestLandingPage() {
           </div>
         </section>
 
-        {/* quest log / mission trail */}
+        {/* quest log */}
         <section className="q-block" id="missions" style={{ scrollMarginTop: 90 }}>
           <div className="qwrap">
             <div className="q-questlog">
               <div className="q-ql-head">
                 <div>
-                  <p className="q-kicker">Six missions, not seventy questions</p>
+                  <p className="q-kicker">
+                    <span className="q-krule" />
+                    <span>Six missions, not seventy questions</span>
+                  </p>
                   <h2 className="q-sec q-sec-sm">A diagnostic that plays like a journey</h2>
                 </div>
-                <span className="q-micro">
-                  28 questions &nbsp;&middot;&nbsp; 7 dimensions &nbsp;&middot;&nbsp; a badge per mission
+                <span className="q-ql-meta">
+                  28 questions <span className="q-mdot" /> 7 dimensions <span className="q-mdot" /> a badge per mission
                 </span>
               </div>
               <div className="q-trail">
@@ -316,7 +316,11 @@ export default function QuestLandingPage() {
         {/* level staircase */}
         <section className="q-block">
           <div className="qwrap q-center">
-            <p className="q-kicker">The climb</p>
+            <p className="q-kicker">
+              <span className="q-krule" />
+              <span>The climb</span>
+              <span className="q-krule" />
+            </p>
             <h2 className="q-sec">Five levels. Every organisation starts somewhere.</h2>
           </div>
           <div className="qwrap">
@@ -337,7 +341,7 @@ export default function QuestLandingPage() {
           <p>
             Built by Tek4All, a registered Nigerian nonprofit (RC 7542130).
             <br />
-            <b>NDPA-aware &nbsp;&middot;&nbsp; we never rank or name your organisation publicly.</b>
+            <b>NDPA-aware &middot; we never rank or name your organisation publicly.</b>
           </p>
           <a className="q-ghost" href="mailto:impact@tekforall.org">
             impact@tekforall.org
