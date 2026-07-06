@@ -26,6 +26,13 @@ const PIPELINE_STEPS = [
   { step: "04", title: "Innovation Pathway", description: "Advanced mentorship, internships, and career readiness for top talent." },
 ];
 
+const SABITEK_FEATURES = [
+  { icon: GraduationCap, label: "Structured courses & cohorts" },
+  { icon: Bot, label: "AI-powered learning tools" },
+  { icon: Award, label: "Verifiable certificates" },
+  { icon: BookOpen, label: "Smart quiz generation" },
+];
+
 const ZYRO_BASE = "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop/dWxBMoMroJirPV5w/";
 const GALLERY_FALLBACK = [
   "13947a-AMqlapqPxVI5D5aD.jpg",
@@ -35,6 +42,19 @@ const GALLERY_FALLBACK = [
   "women-in-tek-YNqBgaVlb5hJW2gV.jpg",
   "img_6095-AVLxOx9ROXHxbl2N.jpg",
 ];
+
+/* Shared header action: quiet bordered pill, lifts on hover */
+function SectionAction({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="group inline-flex h-11 items-center gap-2 self-start rounded-full border border-pale-silver bg-white px-6 text-sm font-medium tracking-tight text-graphite font-ui transition-all duration-300 hover:border-steel hover:shadow-soft md:self-auto"
+    >
+      {children}
+      <ArrowRight size={15} className="text-dark-steel transition-transform duration-300 group-hover:translate-x-0.5" />
+    </Link>
+  );
+}
 
 /* ============================================
    PAGE - fetches all dynamic content
@@ -61,7 +81,7 @@ export default async function HomePage() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[92svh] items-end overflow-hidden bg-matte-black">
         <Image
           src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/dWxBMoMroJirPV5w/shutterstock_1237754227-scaled-copy-d957rrLebWFzK6g2.jpg"
           alt="Children learning with technology"
@@ -69,41 +89,56 @@ export default async function HomePage() {
           className="object-cover"
           priority
           quality={85}
+          sizes="100vw"
         />
-        <div className="absolute inset-0 gradient-hero" />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(13,20,26,0.35)" }} />
+        {/* Layered overlay: quiet at the top, matte black where the type sits */}
+        <div className="absolute inset-0 gradient-hero" aria-hidden="true" />
+        <div className="absolute inset-0 bg-matte-black/20" aria-hidden="true" />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 text-center text-white pt-20">
-          <h1 className="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 max-w-4xl mx-auto">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-44 md:pb-32">
+          <h1 className="mb-6 max-w-4xl font-heading text-[clamp(2.9rem,7.5vw,5.75rem)] font-bold leading-[1.04] tracking-[-0.03em] text-white">
             Skilling Lives,<br />Uplifting Minds
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="mb-10 max-w-xl text-lg leading-relaxed text-white/75 md:text-xl">
             Equipping underserved communities and organisations with the digital skills and tools to thrive in the AI era.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/programmes" className="bg-white text-near-black px-8 py-4 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors text-base">
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/programmes"
+              className="group inline-flex h-[54px] items-center justify-center gap-2 rounded-full bg-white px-8 text-[15px] font-medium text-matte-black font-ui transition-all duration-300 hover:bg-soft-white hover:shadow-cta"
+            >
               Our Programmes
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
-            <Link href="/partnerships" className="border border-white/40 text-white px-8 py-4 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-white/10 transition-colors text-base">
+            <Link
+              href="/partnerships"
+              className="inline-flex h-[54px] items-center justify-center rounded-full border border-white/35 px-8 text-[15px] font-medium text-white font-ui backdrop-blur-sm transition-colors duration-300 hover:border-white/70 hover:bg-white/10"
+            >
               Partner With Us
             </Link>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
-            <div className="w-1 h-3 bg-white/60 rounded-full animate-bounce" />
+        {/* Scroll cue: hairline track with a falling dot */}
+        <div className="absolute bottom-9 left-1/2 z-10 hidden -translate-x-1/2 md:block" aria-hidden="true">
+          <div className="relative h-12 w-px overflow-hidden bg-white/20">
+            <div
+              className="absolute left-0 top-0 h-4 w-px bg-white/90"
+              style={{ animation: "scroll-cue 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite" }}
+            />
           </div>
         </div>
       </section>
 
       {/* ===== IMPACT STATS (from Supabase) ===== */}
       {stats.length > 0 && (
-        <section style={{ backgroundColor: "#0d141a" }} className="py-14 md:py-16">
-          <div className="mx-auto max-w-7xl px-6">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <section className="border-b border-pale-silver bg-white">
+          <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+            <div className="grid grid-cols-2 gap-y-12 md:grid-cols-3 lg:grid-cols-6 lg:gap-y-0 lg:divide-x lg:divide-pale-silver">
               {stats.map((stat) => (
-                <StatCounter key={stat.id} value={stat.value} label={stat.label} />
+                <div key={stat.id} className="px-3">
+                  <StatCounter value={stat.value} label={stat.label} tone="light" />
+                </div>
               ))}
             </div>
           </div>
@@ -111,22 +146,24 @@ export default async function HomePage() {
       )}
 
       {/* ===== THREE PILLARS ===== */}
-      <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
+      <section className="bg-soft-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-10">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">What We Do</h2>
-            <p className="text-mid-gray max-w-2xl mx-auto text-lg">Three pillars driving sustainable digital inclusion for communities and organisations across Nigeria.</p>
+          <FadeIn className="mb-14 max-w-2xl">
+            <h2 className="mb-4 font-heading text-3xl font-bold tracking-tight text-graphite md:text-[2.6rem]">What We Do</h2>
+            <p className="text-lg leading-relaxed text-dark-steel">Three pillars driving sustainable digital inclusion for communities and organisations across Nigeria.</p>
           </FadeIn>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-3">
             {THREE_PILLARS.map((pillar, i) => (
-              <FadeIn key={pillar.title} delay={i * 0.15}>
-                <div className="bg-white rounded-2xl p-8 h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ backgroundColor: "#111" }}>
-                    <pillar.icon size={22} className="text-white" />
+              <FadeIn key={pillar.title} delay={i * 0.12} className="h-full">
+                <div className="flex h-full flex-col rounded-[22px] border border-pale-silver bg-white p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                  <div className="mb-7 flex h-12 w-12 items-center justify-center rounded-[14px] bg-graphite text-white">
+                    <pillar.icon size={21} strokeWidth={1.8} aria-hidden="true" />
                   </div>
-                  <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-near-black mb-3">{pillar.title}</h3>
-                  <p className="text-mid-gray mb-4 leading-relaxed">{pillar.description}</p>
-                  <p className="text-sm font-medium font-[family-name:var(--font-inter)]" style={{ color: "rgba(17,17,17,0.6)" }}>{"\u2192"} {pillar.outcome}</p>
+                  <h3 className="mb-3 font-heading text-xl font-semibold text-graphite">{pillar.title}</h3>
+                  <p className="mb-6 leading-relaxed text-dark-steel">{pillar.description}</p>
+                  <p className="mt-auto flex gap-2 border-t border-pale-silver pt-5 text-sm font-medium text-dark-steel font-ui">
+                    <span aria-hidden="true">{"→"}</span> {pillar.outcome}
+                  </p>
                 </div>
               </FadeIn>
             ))}
@@ -136,44 +173,48 @@ export default async function HomePage() {
 
       {/* ===== PROGRAMMES (from Supabase) ===== */}
       {programmes.length > 0 && (
-        <section className="bg-white py-16 md:py-20">
+        <section className="bg-white py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
-            <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Programmes</h2>
-                <p className="text-mid-gray text-lg">Targeted initiatives building skills at every level.</p>
+            <FadeIn className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div className="max-w-xl">
+                <h2 className="mb-3 font-heading text-3xl font-bold tracking-tight text-graphite md:text-[2.6rem]">Our Programmes</h2>
+                <p className="text-lg text-dark-steel">Targeted initiatives building skills at every level.</p>
               </div>
-              <Link href="/programmes" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-                View All <ArrowRight size={16} />
-              </Link>
+              <SectionAction href="/programmes">View All</SectionAction>
             </FadeIn>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {programmes.slice(0, 4).map((prog, i) => (
-                <FadeIn key={prog.id} delay={i * 0.1}>
+                <FadeIn key={prog.id} delay={i * 0.1} className="h-full">
                   <Link
                     href={`/programmes/${prog.slug}`}
-                    className="group block rounded-2xl overflow-hidden hover:shadow-lg transition-all"
-                    style={{ backgroundColor: "#f2f2f2" }}
+                    className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-pale-silver bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
                   >
-                    <div className="relative aspect-[16/10] overflow-hidden">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-light-gray">
                       {prog.cover_image_url ? (
-                        <Image src={prog.cover_image_url} alt={prog.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image
+                          src={prog.cover_image_url}
+                          alt={prog.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                        />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center" style={{ backgroundColor: "#e5e5e5" }}>
-                          <span className="text-mid-gray/40 font-[family-name:var(--font-heading)]">{prog.title}</span>
+                        <div className="absolute inset-0 flex items-center justify-center bg-pale-silver">
+                          <span className="font-heading text-steel">{prog.title}</span>
                         </div>
                       )}
-                      <div className="absolute top-3 left-3">
-                        <span className="text-near-black text-xs font-medium font-[family-name:var(--font-inter)] px-3 py-1 rounded-full" style={{ backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)" }}>
+                      <div className="absolute left-4 top-4">
+                        <span className="rounded-full bg-white/90 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-graphite font-ui backdrop-blur-md">
                           {prog.category}
                         </span>
                       </div>
                     </div>
-                    <div className="p-5">
-                      <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2">{prog.title}</h3>
-                      <p className="text-mid-gray text-sm leading-relaxed line-clamp-2">{prog.short_description}</p>
-                      <span className="inline-flex items-center gap-1 text-near-black text-sm font-medium font-[family-name:var(--font-inter)] mt-3 group-hover:gap-2 transition-all">
-                        Learn more <ChevronRight size={14} />
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="mb-2 font-heading text-lg font-semibold text-graphite">{prog.title}</h3>
+                      <p className="text-sm leading-relaxed text-dark-steel line-clamp-2">{prog.short_description}</p>
+                      <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-medium text-graphite font-ui">
+                        Learn more
+                        <ChevronRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </div>
                   </Link>
@@ -185,105 +226,133 @@ export default async function HomePage() {
       )}
 
       {/* ===== SCHOOLS PIPELINE ===== */}
-      <section className="py-16 md:py-20" style={{ background: "linear-gradient(135deg, #0d141a 0%, #1d1e20 100%)" }}>
+      <section className="gradient-dark py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="text-center mb-10">
-            <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Youth Journey</p>
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-4">Schools to Innovation Pipeline</h2>
-            <p style={{ color: "rgba(255,255,255,0.5)" }} className="max-w-2xl mx-auto text-lg">A structured pathway from first spark to career readiness.</p>
+          <FadeIn className="mb-16 flex flex-col items-center text-center">
+            <p className="section-label mb-5 text-steel">Youth Journey</p>
+            <h2 className="mb-4 font-heading text-3xl font-bold tracking-tight text-white md:text-[2.6rem]">Schools to Innovation Pipeline</h2>
+            <p className="max-w-2xl text-lg text-white/60">A structured pathway from first spark to career readiness.</p>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {PIPELINE_STEPS.map((s, i) => (
-              <FadeIn key={s.step} delay={i * 0.12}>
-                <div className="rounded-2xl p-6 h-full transition-colors" style={{ backgroundColor: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <span className="font-[family-name:var(--font-heading)] text-5xl font-bold" style={{ color: "rgba(255,255,255,0.15)" }}>{s.step}</span>
-                  <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-white mt-4 mb-2">{s.title}</h3>
-                  <p style={{ color: "rgba(255,255,255,0.5)" }} className="text-sm leading-relaxed">{s.description}</p>
-                </div>
-              </FadeIn>
-            ))}
+
+          {/* Timeline: hairline runs behind the numbered beads on desktop */}
+          <div className="relative">
+            <div className="absolute left-[8%] right-[8%] top-[26px] hidden h-px bg-white/10 lg:block" aria-hidden="true" />
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+              {PIPELINE_STEPS.map((s, i) => (
+                <FadeIn key={s.step} delay={i * 0.1} className="h-full">
+                  <div className="flex h-full flex-col">
+                    <div className="relative z-10 mb-5 flex h-[52px] w-[52px] items-center justify-center rounded-full border border-white/15 bg-graphite font-heading text-sm font-semibold tracking-widest text-steel">
+                      {s.step}
+                    </div>
+                    <div className="flex-1 rounded-[22px] border border-white/10 bg-white/[0.04] p-7 transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.06]">
+                      <h3 className="mb-2.5 font-heading text-lg font-semibold text-white">{s.title}</h3>
+                      <p className="text-sm leading-relaxed text-white/60">{s.description}</p>
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
-          <FadeIn className="text-center mt-10">
-            <Link href="/partnerships" className="bg-white text-near-black px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2">
-              Bring Tek4All to Your School <ArrowRight size={16} />
+
+          <FadeIn className="mt-14 text-center">
+            <Link
+              href="/partnerships"
+              className="group inline-flex h-[52px] items-center gap-2 rounded-full bg-white px-8 text-[15px] font-medium text-matte-black font-ui transition-all duration-300 hover:bg-soft-white hover:shadow-cta"
+            >
+              Bring Tek4All to Your School
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
           </FadeIn>
         </div>
       </section>
 
       {/* ===== SABITEK - LEARNING INFRASTRUCTURE ===== */}
-      <section className="relative" style={{ backgroundColor: "#0d141a" }}>
-        <div className="absolute pointer-events-none" style={{ top: "20%", right: "10%", width: "500px", height: "500px", background: "radial-gradient(circle, rgba(50,55,65,0.4) 0%, transparent 70%)" }} aria-hidden="true" />
-
-        <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 md:pt-20 md:pb-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-start">
-            <FadeIn>
-              <div className="lg:sticky lg:top-32 lg:py-8">
-                <p style={{ color: "rgba(255,255,255,0.4)", fontFamily: "var(--font-inter), sans-serif", fontSize: "12px", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase" }} className="mb-3">Learning Infrastructure</p>
-                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white mb-2">Sabitek</h2>
-                <p className="font-[family-name:var(--font-heading)] text-lg md:text-xl font-medium mb-5" style={{ color: "rgba(255,255,255,0.65)" }}>Structured Learning, Powered by AI</p>
-                <p style={{ color: "rgba(255,255,255,0.5)" }} className="mb-6 leading-relaxed">The learning infrastructure we use to deliver training cohorts, run structured programmes, and ensure continuous learning across our communities.</p>
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  {[
-                    { icon: GraduationCap, label: "Structured courses & cohorts" },
-                    { icon: Bot, label: "AI-powered learning tools" },
-                    { icon: Award, label: "Verifiable certificates" },
-                    { icon: BookOpen, label: "Smart quiz generation" },
-                  ].map((f) => (
-                    <div key={f.label} className="flex items-start gap-2.5" style={{ color: "rgba(255,255,255,0.55)" }}>
-                      <f.icon size={16} className="mt-0.5 flex-shrink-0" style={{ color: "rgba(255,255,255,0.4)" }} />
-                      <span className="text-sm leading-snug">{f.label}</span>
-                    </div>
-                  ))}
+      <section className="bg-soft-white py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <FadeIn>
+            <div className="relative overflow-hidden rounded-[28px] bg-matte-black px-6 py-14 shadow-panel sm:px-10 md:px-14 md:py-20 lg:px-16">
+              <div
+                className="pointer-events-none absolute -right-32 -top-32 h-[520px] w-[520px] rounded-full"
+                style={{ background: "radial-gradient(circle, rgba(70,75,82,0.35) 0%, transparent 70%)" }}
+                aria-hidden="true"
+              />
+              <div className="relative grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
+                <div>
+                  <p className="section-label mb-5 text-steel">Learning Infrastructure</p>
+                  <h2 className="mb-2 font-heading text-3xl font-bold tracking-tight text-white md:text-[2.6rem]">Sabitek</h2>
+                  <p className="mb-6 font-heading text-lg font-medium text-white/70 md:text-xl">Structured Learning, Powered by AI</p>
+                  <p className="mb-8 max-w-lg leading-relaxed text-white/60">
+                    The learning infrastructure we use to deliver training cohorts, run structured programmes, and ensure continuous learning across our communities.
+                  </p>
+                  <div className="mb-10 grid gap-3 sm:grid-cols-2">
+                    {SABITEK_FEATURES.map((f) => (
+                      <div key={f.label} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3.5">
+                        <f.icon size={16} strokeWidth={1.8} className="shrink-0 text-white/60" aria-hidden="true" />
+                        <span className="text-sm leading-snug text-white/75">{f.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href="https://sabitek.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex h-12 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-matte-black font-ui transition-all duration-300 hover:bg-soft-white hover:shadow-cta"
+                    >
+                      Get Started
+                      <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </a>
+                    <a
+                      href="https://sabitek.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-12 items-center rounded-full border border-white/20 px-7 text-sm font-medium text-white/80 font-ui transition-colors duration-300 hover:border-white/50 hover:text-white"
+                    >
+                      Explore Platform
+                    </a>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-3">
-                  <a href="https://sabitek.app" target="_blank" rel="noopener noreferrer" className="bg-white text-near-black px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors inline-flex items-center gap-2 text-sm">
-                    Get Started <ArrowRight size={14} />
-                  </a>
-                  <a href="https://sabitek.app" target="_blank" rel="noopener noreferrer" className="px-7 py-3 rounded-full font-medium font-[family-name:var(--font-inter)] text-sm inline-flex items-center gap-2 transition-colors" style={{ border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)" }}>
-                    Explore Platform
-                  </a>
-                </div>
-              </div>
-            </FadeIn>
 
-            <FadeIn delay={0.2}>
-              <div className="relative">
-                <Image
-                  src="/images/sabitek-preview.png"
-                  alt="Sabitek learning platform on desktop and mobile"
-                  width={900}
-                  height={650}
-                  className="w-full h-auto block"
-                  style={{
-                    filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.4))",
-                    borderRadius: "12px",
-                  }}
-                />
+                <FadeIn delay={0.15} direction="none">
+                  <div className="relative">
+                    <Image
+                      src="/images/sabitek-preview.png"
+                      alt="Sabitek learning platform on desktop and mobile"
+                      width={900}
+                      height={650}
+                      className="block h-auto w-full rounded-xl"
+                      style={{ filter: "drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5))" }}
+                    />
+                  </div>
+                </FadeIn>
               </div>
-            </FadeIn>
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* ===== GALLERY TEASER (from Supabase or fallback) ===== */}
-      <section className="bg-white py-16 md:py-20">
+      <section className="bg-white py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
-          <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-            <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Our Impact in Pictures</h2>
-              <p className="text-mid-gray text-lg">Moments from our programmes across Nigeria.</p>
+          <FadeIn className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div className="max-w-xl">
+              <h2 className="mb-3 font-heading text-3xl font-bold tracking-tight text-graphite md:text-[2.6rem]">Our Impact in Pictures</h2>
+              <p className="text-lg text-dark-steel">Moments from our programmes across Nigeria.</p>
             </div>
-            <Link href="/gallery" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-              View Gallery <ArrowRight size={16} />
-            </Link>
+            <SectionAction href="/gallery">View Gallery</SectionAction>
           </FadeIn>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
             {GALLERY_FALLBACK.map((img, i) => (
-              <FadeIn key={img} delay={i * 0.08}>
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group">
-                  <Image src={`${ZYRO_BASE}${img}`} alt="Tek4All community programme" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 group-hover:bg-near-black/20 transition-colors" />
+              <FadeIn key={img} delay={i * 0.06}>
+                <div className="group relative aspect-[4/3] overflow-hidden rounded-[18px] bg-light-gray">
+                  <Image
+                    src={`${ZYRO_BASE}${img}`}
+                    alt="Tek4All community programme"
+                    fill
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-matte-black/45 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
                 </div>
               </FadeIn>
             ))}
@@ -293,34 +362,41 @@ export default async function HomePage() {
 
       {/* ===== LATEST BLOG (from Supabase) ===== */}
       {blogPosts.length > 0 && (
-        <section style={{ backgroundColor: "#f7f7f7" }} className="py-16 md:py-20">
+        <section className="bg-soft-white py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
-            <FadeIn className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-              <div>
-                <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-2">Latest from Tek4All</h2>
-                <p className="text-mid-gray text-lg">News, stories, and updates from our community.</p>
+            <FadeIn className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div className="max-w-xl">
+                <h2 className="mb-3 font-heading text-3xl font-bold tracking-tight text-graphite md:text-[2.6rem]">Latest from Tek4All</h2>
+                <p className="text-lg text-dark-steel">News, stories, and updates from our community.</p>
               </div>
-              <Link href="/blog" className="flex items-center gap-2 text-near-black font-medium font-[family-name:var(--font-inter)] hover:gap-3 transition-all">
-                Read All <ArrowRight size={16} />
-              </Link>
+              <SectionAction href="/blog">Read All</SectionAction>
             </FadeIn>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid gap-6 md:grid-cols-3">
               {blogPosts.map((post, i) => (
-                <FadeIn key={post.id} delay={i * 0.12}>
-                  <Link href={`/blog/${post.slug}`} className="group block bg-white rounded-2xl overflow-hidden h-full" style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-                    <div className="relative aspect-[16/9] overflow-hidden" style={{ backgroundColor: "#f2f2f2" }}>
+                <FadeIn key={post.id} delay={i * 0.1} className="h-full">
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-[22px] border border-pale-silver bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+                  >
+                    <div className="relative aspect-video overflow-hidden bg-light-gray">
                       {post.cover_image_url && (
-                        <Image src={post.cover_image_url} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image
+                          src={post.cover_image_url}
+                          alt={post.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                        />
                       )}
                     </div>
-                    <div className="p-6">
+                    <div className="flex flex-1 flex-col p-7">
                       {post.published_at && (
-                        <p className="text-mid-gray text-xs font-[family-name:var(--font-inter)] mb-2">
+                        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-dark-steel font-ui">
                           {new Date(post.published_at).toLocaleDateString("en-NG", { year: "numeric", month: "long", day: "numeric" })}
                         </p>
                       )}
-                      <h3 className="font-[family-name:var(--font-heading)] text-lg font-semibold text-near-black mb-2 line-clamp-2">{post.title}</h3>
-                      {post.excerpt && <p className="text-mid-gray text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>}
+                      <h3 className="mb-2.5 font-heading text-lg font-semibold leading-snug text-graphite line-clamp-2">{post.title}</h3>
+                      {post.excerpt && <p className="text-sm leading-relaxed text-dark-steel line-clamp-3">{post.excerpt}</p>}
                     </div>
                   </Link>
                 </FadeIn>
@@ -332,45 +408,53 @@ export default async function HomePage() {
 
       {/* ===== SOCIAL FEED (from Supabase) ===== */}
       {socialPosts.length > 0 && (
-        <section className="bg-white py-16 md:py-20">
+        <section className="bg-white py-20 md:py-28">
           <div className="mx-auto max-w-7xl px-6">
-            <FadeIn className="text-center mb-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-near-black mb-4">Follow Our Journey</h2>
-              <p className="text-mid-gray text-lg">Stay connected on Instagram and LinkedIn.</p>
+            <FadeIn className="mb-12 text-center">
+              <h2 className="mb-3 font-heading text-3xl font-bold tracking-tight text-graphite md:text-[2.6rem]">Follow Our Journey</h2>
+              <p className="text-lg text-dark-steel">Stay connected on Instagram and LinkedIn.</p>
             </FadeIn>
             <FadeIn>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 {socialPosts.slice(0, 4).map((post) => (
                   <a
                     key={post.id}
                     href={post.external_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group block rounded-2xl overflow-hidden relative"
-                    style={{ backgroundColor: "#f2f2f2" }}
+                    className="group relative block overflow-hidden rounded-[18px] border border-pale-silver bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
                   >
-                    <div className="relative aspect-square">
+                    <div className="relative aspect-square bg-soft-white">
                       {post.image_url ? (
-                        <Image src={post.image_url} alt={post.excerpt || "Social post"} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image
+                          src={post.image_url}
+                          alt={post.excerpt || "Social post"}
+                          fill
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                        />
                       ) : (
+                        /* Intentional placeholder: quiet bordered chip on soft white */
                         <div className="absolute inset-0 flex items-center justify-center">
-                          {post.platform === "instagram" ? <Instagram size={32} className="text-mid-gray/30" /> : <Linkedin size={32} className="text-mid-gray/30" />}
+                          <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-pale-silver bg-white text-dark-steel shadow-soft">
+                            {post.platform === "instagram" ? <Instagram size={22} strokeWidth={1.6} /> : <Linkedin size={22} strokeWidth={1.6} />}
+                          </span>
                         </div>
                       )}
                       {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-near-black/0 group-hover:bg-near-black/40 transition-colors flex items-center justify-center">
-                        <ExternalLink size={20} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-matte-black/0 transition-colors duration-300 group-hover:bg-matte-black/40">
+                        <ExternalLink size={20} className="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       </div>
                       {/* Platform badge */}
-                      <div className="absolute top-3 left-3">
-                        <span className="text-xs font-medium px-2.5 py-1 rounded-full font-[family-name:var(--font-inter)] capitalize" style={{ backgroundColor: "rgba(255,255,255,0.9)", backdropFilter: "blur(8px)" }}>
+                      <div className="absolute left-3.5 top-3.5">
+                        <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-graphite font-ui backdrop-blur-md">
                           {post.platform}
                         </span>
                       </div>
                     </div>
                     {post.excerpt && (
-                      <div className="p-3">
-                        <p className="text-mid-gray text-xs line-clamp-2">{post.excerpt}</p>
+                      <div className="border-t border-pale-silver p-3.5">
+                        <p className="text-xs leading-relaxed text-dark-steel line-clamp-2">{post.excerpt}</p>
                       </div>
                     )}
                   </a>
@@ -383,25 +467,31 @@ export default async function HomePage() {
 
       {/* ===== PARTNER LOGOS (from Supabase) ===== */}
       {partners.length > 0 && (
-        <section className="py-14 md:py-16" style={{ backgroundColor: "#ffffff", borderTop: "1px solid #f2f2f2", borderBottom: "1px solid #f2f2f2" }}>
+        <section className="border-y border-pale-silver bg-white py-16 md:py-24">
           <div className="mx-auto max-w-7xl px-6">
-            <FadeIn className="text-center mb-8">
-              <p className="text-xs font-medium uppercase mb-2" style={{ fontFamily: "var(--font-inter), sans-serif", letterSpacing: "0.15em", color: "rgba(0,0,0,0.35)" }}>Trusted By</p>
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold" style={{ color: "#111" }}>Our Partners & Supporters</h2>
+            <FadeIn className="mb-12 text-center">
+              <p className="mb-3 text-[11.5px] font-semibold uppercase tracking-[0.22em] text-dark-steel font-ui">Trusted By</p>
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-graphite md:text-3xl">Our Partners &amp; Supporters</h2>
             </FadeIn>
-            <div className="flex items-center justify-center gap-10 md:gap-14 flex-wrap">
+            <div className="flex flex-wrap items-center justify-center gap-x-14 gap-y-10 md:gap-x-20">
               {partners.map((partner) => (
                 <FadeIn key={partner.id}>
                   {partner.website_url ? (
-                    <a href={partner.website_url} target="_blank" rel="noopener noreferrer" className="block opacity-60 hover:opacity-100 transition-opacity" title={partner.name}>
+                    <a
+                      href={partner.website_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block opacity-55 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                      title={partner.name}
+                    >
                       <div className="relative h-12 w-28 md:w-32">
-                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain" />
+                        <Image src={partner.logo_url} alt={partner.name} fill sizes="128px" className="object-contain" />
                       </div>
                     </a>
                   ) : (
-                    <div className="opacity-60" title={partner.name}>
+                    <div className="opacity-55 grayscale" title={partner.name}>
                       <div className="relative h-12 w-28 md:w-32">
-                        <Image src={partner.logo_url} alt={partner.name} fill className="object-contain" />
+                        <Image src={partner.logo_url} alt={partner.name} fill sizes="128px" className="object-contain" />
                       </div>
                     </div>
                   )}

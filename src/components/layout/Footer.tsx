@@ -49,27 +49,28 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-deep-black text-white">
-      {/* CTA Band */}
-      <div className="gradient-cta">
-        <div className="mx-auto max-w-7xl px-6 py-14 text-center">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold mb-4">
+    <footer className="bg-matte-black text-white">
+      {/* ===== JOIN THE MOVEMENT — matte black statement band ===== */}
+      <div className="gradient-cta border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 py-24 text-center md:py-32">
+          <h2 className="mx-auto mb-6 max-w-3xl font-heading text-4xl font-bold tracking-tight md:text-6xl">
             Join the Movement
           </h2>
-          <p className="text-white/70 max-w-xl mx-auto mb-8 text-lg">
+          <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-white/65">
             Partner with us to bridge the digital divide and empower communities
             with future-ready skills.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href="/partnerships"
-              className="bg-white text-near-black px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-off-white transition-colors"
+              className="group inline-flex h-[54px] items-center justify-center gap-2 rounded-full bg-white px-9 text-[15px] font-medium text-matte-black font-ui transition-all duration-300 hover:bg-soft-white hover:shadow-cta"
             >
               Partner With Us
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
             <Link
               href="/volunteer"
-              className="border border-white/30 text-white px-8 py-3.5 rounded-full font-medium font-[family-name:var(--font-inter)] hover:bg-white/10 transition-colors"
+              className="inline-flex h-[54px] items-center justify-center rounded-full border border-white/25 px-9 text-[15px] font-medium text-white font-ui transition-colors duration-300 hover:border-white/60 hover:bg-white/5"
             >
               Volunteer
             </Link>
@@ -77,19 +78,19 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Main Footer */}
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      {/* ===== MAIN FOOTER ===== */}
+      <div className="mx-auto max-w-7xl px-6 pb-12 pt-16 md:pt-20">
+        <div className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-12">
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-4">
             <Image
               src="/images/tek4all-logo-white.png"
               alt="Tek4All"
               width={140}
               height={42}
-              className="h-9 w-auto mb-4"
+              className="mb-5 h-9 w-auto"
             />
-            <p className="text-white/60 text-sm leading-relaxed mb-6">
+            <p className="mb-8 max-w-xs text-sm leading-relaxed text-white/60">
               Bridging the digital divide through practical skills, inclusive
               access, and future-ready systems.
             </p>
@@ -99,33 +100,33 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors duration-300 hover:border-white/50 hover:bg-white/5 hover:text-white"
               >
-                <Instagram size={16} />
+                <Instagram size={16} strokeWidth={1.8} />
               </a>
               <a
                 href="https://www.linkedin.com/company/tekforall"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition-colors duration-300 hover:border-white/50 hover:bg-white/5 hover:text-white"
               >
-                <Linkedin size={16} />
+                <Linkedin size={16} strokeWidth={1.8} />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-[family-name:var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-4 text-white/40">
+          <div className="lg:col-span-2">
+            <h3 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40 font-ui">
               Quick Links
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {QUICK_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/70 hover:text-white text-sm transition-colors"
+                    className="text-sm text-white/65 transition-colors duration-200 hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -135,16 +136,16 @@ export function Footer() {
           </div>
 
           {/* Programmes */}
-          <div>
-            <h3 className="font-[family-name:var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-4 text-white/40">
+          <div className="lg:col-span-3">
+            <h3 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40 font-ui">
               Programmes
             </h3>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {PROGRAMME_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-white/70 hover:text-white text-sm transition-colors"
+                    className="text-sm text-white/65 transition-colors duration-200 hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -154,70 +155,74 @@ export function Footer() {
           </div>
 
           {/* Contact + Newsletter */}
-          <div>
-            <h3 className="font-[family-name:var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-4 text-white/40">
+          <div className="lg:col-span-3">
+            <h3 className="mb-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40 font-ui">
               Contact
             </h3>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-start gap-2.5 text-sm text-white/70">
-                <Mail size={15} className="mt-0.5 flex-shrink-0" />
-                <a href="mailto:impact@tekforall.org" className="hover:text-white transition-colors">
+            <ul className="mb-10 space-y-3.5">
+              <li className="flex items-start gap-2.5 text-sm text-white/65">
+                <Mail size={15} strokeWidth={1.8} className="mt-0.5 shrink-0 text-white/40" />
+                <a href="mailto:impact@tekforall.org" className="transition-colors duration-200 hover:text-white">
                   impact@tekforall.org
                 </a>
               </li>
-              <li className="flex items-start gap-2.5 text-sm text-white/70">
-                <Phone size={15} className="mt-0.5 flex-shrink-0" />
-                <a href="tel:+2347031064144" className="hover:text-white transition-colors">
+              <li className="flex items-start gap-2.5 text-sm text-white/65">
+                <Phone size={15} strokeWidth={1.8} className="mt-0.5 shrink-0 text-white/40" />
+                <a href="tel:+2347031064144" className="transition-colors duration-200 hover:text-white">
                   +234-703-106-4144
                 </a>
               </li>
-              <li className="flex items-start gap-2.5 text-sm text-white/70">
-                <MapPin size={15} className="mt-0.5 flex-shrink-0" />
+              <li className="flex items-start gap-2.5 text-sm leading-relaxed text-white/65">
+                <MapPin size={15} strokeWidth={1.8} className="mt-0.5 shrink-0 text-white/40" />
                 <span>Ventures Park, 5 Kwaji Close, Maitama, Abuja, Nigeria</span>
               </li>
             </ul>
 
             {/* Newsletter */}
-            <h3 className="font-[family-name:var(--font-heading)] font-semibold text-sm uppercase tracking-wider mb-3 text-white/40">
+            <h3 className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/40 font-ui">
               Join Our Community
             </h3>
-            <form onSubmit={handleNewsletter} className="flex gap-2">
+            <form onSubmit={handleNewsletter} className="flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] p-1.5 transition-colors duration-300 focus-within:border-white/40">
+              <label htmlFor="footer-newsletter-email" className="sr-only">
+                Email address
+              </label>
               <input
+                id="footer-newsletter-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
                 required
-                className="flex-1 bg-white/10 border border-white/10 rounded-full px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-white/30 transition-colors"
+                className="min-w-0 flex-1 bg-transparent px-3.5 text-sm text-white placeholder:text-white/45 focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="bg-white text-near-black w-10 h-10 rounded-full flex items-center justify-center hover:bg-off-white transition-colors disabled:opacity-50 flex-shrink-0"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-matte-black transition-colors duration-300 hover:bg-soft-white disabled:opacity-50"
                 aria-label="Subscribe"
               >
                 <ArrowRight size={16} />
               </button>
             </form>
             {status === "success" && (
-              <p className="text-green-400 text-xs mt-2">Welcome to our community!</p>
+              <p className="mt-3 text-xs text-white/80">Welcome to our community!</p>
             )}
             {status === "error" && (
-              <p className="text-red-400 text-xs mt-2">Something went wrong. Please try again.</p>
+              <p className="mt-3 text-xs text-red-400">Something went wrong. Please try again.</p>
             )}
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/40 text-sm">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
+          <p className="text-sm text-white/40">
             Tek4All &copy; {new Date().getFullYear()}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-sm text-white/40">
-            <Link href="/privacy" className="hover:text-white/70 transition-colors">
+          <div className="flex gap-7 text-sm text-white/40">
+            <Link href="/privacy" className="transition-colors duration-200 hover:text-white/80">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white/70 transition-colors">
+            <Link href="/terms" className="transition-colors duration-200 hover:text-white/80">
               Terms
             </Link>
           </div>

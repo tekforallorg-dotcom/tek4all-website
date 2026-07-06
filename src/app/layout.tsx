@@ -3,6 +3,7 @@ import { DM_Sans, Outfit, Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -71,9 +72,9 @@ export default function RootLayout({
       className={`${dmSans.variable} ${outfit.variable} ${inter.variable}`}
     >
       <body className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <SiteChrome navbar={<Navbar />} footer={<Footer />}>
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

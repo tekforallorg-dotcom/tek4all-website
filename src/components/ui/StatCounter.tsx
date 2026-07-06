@@ -5,9 +5,11 @@ import { useEffect, useRef, useState } from "react";
 interface StatCounterProps {
   value: string;
   label: string;
+  /** "light" = graphite numbers on light surfaces, "dark" = white numbers on dark surfaces */
+  tone?: "light" | "dark";
 }
 
-export function StatCounter({ value, label }: StatCounterProps) {
+export function StatCounter({ value, label, tone = "dark" }: StatCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [displayValue, setDisplayValue] = useState("0");
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -15,6 +17,12 @@ export function StatCounter({ value, label }: StatCounterProps) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayValue(value);
+      setHasAnimated(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -64,12 +72,15 @@ export function StatCounter({ value, label }: StatCounterProps) {
     requestAnimationFrame(step);
   };
 
+  const numberColor = tone === "light" ? "text-graphite" : "text-white";
+  const labelColor = tone === "light" ? "text-dark-steel" : "text-white/60";
+
   return (
     <div ref={ref} className="text-center">
-      <p className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-white mb-1">
+      <p className={`font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold tabular-nums tracking-tight mb-2 ${numberColor}`}>
         {displayValue}
       </p>
-      <p className="text-white/60 text-sm font-[family-name:var(--font-inter)]">
+      <p className={`text-xs font-medium uppercase tracking-[0.14em] font-[family-name:var(--font-ui)] ${labelColor}`}>
         {label}
       </p>
     </div>
