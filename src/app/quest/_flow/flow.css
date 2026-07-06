@@ -50,63 +50,6 @@
   to   { left: 100%; }
 }
 
-/* ---- theme markers: abstract silhouettes riding the fill tip ---- */
-.qf-marker {
-  position: absolute; width: 26px; pointer-events: none;
-  transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  animation: qf-marker-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes qf-marker-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-.qf-marker-fig { display: block; }
-.qf-g-ink { stroke: var(--q-black); }
-.qf-g-inkfill { fill: var(--q-black); }
-.qf-g-gold { stroke: var(--q-gold-deep); }
-.qf-g-goldfill { fill: var(--q-gold); }
-
-/* Tightrope Walker: stands on the line, slow balancing sway */
-.qf-theme-tightrope .qf-marker { top: -24px; transform: translateX(-50%); }
-.qf-theme-tightrope .qf-marker-fig {
-  transform-origin: 50% 100%;
-  animation: qf-sway 3.6s ease-in-out infinite alternate;
-}
-@keyframes qf-sway {
-  from { transform: rotate(-2.4deg); }
-  to   { transform: rotate(2.4deg); }
-}
-
-/* Hanging Bar Traverse: gold grip on the rail, controlled swing beneath */
-.qf-theme-hanging-bar .qf-marker { top: -1px; transform: translateX(-50%); }
-.qf-theme-hanging-bar .qf-marker-fig {
-  transform-origin: 50% 2px;
-  animation: qf-swing 2.9s ease-in-out infinite alternate;
-}
-@keyframes qf-swing {
-  from { transform: rotate(-3.2deg); }
-  to   { transform: rotate(3.2deg); }
-}
-
-/* Pathfinder Drive: capsule glides on the route, gold trail behind */
-.qf-theme-pathfinder-drive .qf-marker { top: -5px; width: 30px; transform: translateX(-50%); }
-.qf-theme-pathfinder-drive .qf-marker::before {
-  content: ""; position: absolute; right: 100%; top: 50%; margin-right: -3px;
-  width: 18px; height: 2px; transform: translateY(-50%);
-  background: linear-gradient(90deg, transparent, var(--q-gold));
-  opacity: 0.65;
-}
-
-/* Mountain Climber: leaning traverse, quiet reach bob */
-.qf-theme-mountain-climber .qf-marker { top: -24px; transform: translateX(-58%); }
-.qf-theme-mountain-climber .qf-marker-fig {
-  animation: qf-reach 2.6s ease-in-out infinite alternate;
-}
-@keyframes qf-reach {
-  from { transform: translateY(0) rotate(0deg); }
-  to   { transform: translateY(-1.4px) rotate(-1.6deg); }
-}
-
 .qf-path-nodes {
   position: relative;
   display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
@@ -426,7 +369,6 @@
   .qf-progress { margin-bottom: 24px; }
   .qf-path-bead { width: 30px; height: 30px; font-size: 10.5px; }
   .qf-path-line { top: 15px; }
-  .qf-theme-tightrope .qf-marker, .qf-theme-mountain-climber .qf-marker { top: -23px; }
   .qf-path-label { font-size: 9.5px; }
   .qf-purpose { font-size: 12.5px; }
   .qf-panel { padding: 20px 20px 18px; }
@@ -481,8 +423,6 @@
   .qf-skel, .qf-path-pulse, .qf-panel-live, .qf-core-ring.is-active,
   .qf-path-node.is-active .qf-path-bead { animation: none; }
   .qf-path-pulse { display: none; }
-  .qf-marker { transition: none; animation: none; }
-  .qf-marker-fig { animation: none; }
   .qf-insight { animation: none; }
   .qf-opt.is-selected .qf-mark { animation: none; }
 }
