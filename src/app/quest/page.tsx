@@ -189,7 +189,7 @@ export default function QuestLandingPage() {
                 first, without wasting money, exposing data, or chasing hype.
               </p>
               <div className="q-cta-row q-rise" style={{ animationDelay: "0.24s" }}>
-                <a className="q-cta" href="#missions">
+                <a className="q-cta" href="/quest/start">
                   Start the Quest
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" />
